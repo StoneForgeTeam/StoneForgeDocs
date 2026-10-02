@@ -4,6 +4,6 @@
   "description": "C# mod loader for Stoneshard",
   "plugins": ["hints", "-sharing"],
   "pluginsConfig": {
-    "fontsettings": { "theme": "white" }
+    "fontsettings": { "theme": "night" }
   }
 }
