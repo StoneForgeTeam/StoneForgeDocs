@@ -9,4 +9,8 @@
 .markdown-section .sf-hint-success { border-color: #26a86b; background: #ebf8f1; }
 .markdown-section .sf-hint-warning { border-color: #e8a317; background: #fdf6e3; }
 .markdown-section .sf-hint-danger  { border-color: #e5484d; background: #fdeeee; }
-.book.color-theme-2 .markdown-section .sf-hint { background: #23262d; }
+/* Night theme */
+.book.color-theme-2 .markdown-section .sf-hint-info    { background: #1c2533; }
+.book.color-theme-2 .markdown-section .sf-hint-success { background: #19291f; }
+.book.color-theme-2 .markdown-section .sf-hint-warning { background: #2e2716; }
+.book.color-theme-2 .markdown-section .sf-hint-danger  { background: #331c1d; }
