@@ -2,7 +2,7 @@
 
 Put GML functions in a mod's `GML` folder (the mod itself: see [Writing a mod](writing-a-mod.md)). StoneForge compiles them into `data.win` when the game starts, and a Roslyn source generator gives the mod's C# a class to call them with. The same generator works in Visual Studio. GML changes need a full game restart; the mod's C# still hot-reloads.
 
-## Calling your GML from C#
+## Calling your GML from C# code
 
 The bindings are named after the mod's folder. A mod in `mods\ExampleMod` with `GML\Add.gml`:
 

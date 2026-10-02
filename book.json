@@ -1,0 +1,9 @@
+{
+  "root": "./docs",
+  "title": "StoneForge",
+  "description": "C# mod loader for Stoneshard",
+  "plugins": ["hints", "-sharing"],
+  "pluginsConfig": {
+    "fontsettings": { "theme": "white" }
+  }
+}

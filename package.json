@@ -1,0 +1,13 @@
+{
+  "name": "stoneforge-docs",
+  "private": true,
+  "description": "StoneForge documentation, built as a static site with HonKit.",
+  "scripts": {
+    "build": "honkit build . _book",
+    "serve": "honkit serve . _book"
+  },
+  "devDependencies": {
+    "honkit": "^6.2.2",
+    "honkit-plugin-hints": "file:./honkit/plugin-hints"
+  }
+}

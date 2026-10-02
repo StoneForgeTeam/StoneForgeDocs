@@ -1,0 +1,8 @@
+{
+  "name": "honkit-plugin-hints",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Renders GitBook {% hint %} blocks for the self-hosted HonKit build.",
+  "main": "index.js",
+  "engines": { "gitbook": ">=3.0.0" }
+}

@@ -1,0 +1,12 @@
+.markdown-section .sf-hint {
+    margin: 0 0 1em;
+    padding: 0.75em 1em;
+    border-left: 4px solid;
+    border-radius: 4px;
+}
+.markdown-section .sf-hint > :last-child { margin-bottom: 0; }
+.markdown-section .sf-hint-info    { border-color: #3884ff; background: #eef4ff; }
+.markdown-section .sf-hint-success { border-color: #26a86b; background: #ebf8f1; }
+.markdown-section .sf-hint-warning { border-color: #e8a317; background: #fdf6e3; }
+.markdown-section .sf-hint-danger  { border-color: #e5484d; background: #fdeeee; }
+.book.color-theme-2 .markdown-section .sf-hint { background: #23262d; }
