@@ -10,7 +10,7 @@ MSL is not required. StoneForge uses UndertaleModLib 0.9.2.0 and Underanalyzer d
 ## Install
 
 1. Close Stoneshard.
-2. Extract the StoneForge release and run `Install StoneForge.cmd`. It finds Stoneshard through Steam (or asks for its folder), copies StoneForge in, and sets the game up. Your game's own files are kept, so it can all be undone.
+2. Download `StoneForge-<version>.zip` from the [StoneForge releases](https://github.com/StoneForgeTeam/StoneForge/releases), extract it and run `Install StoneForge.cmd`. It finds Stoneshard through Steam (or asks for its folder), copies StoneForge in, and sets the game up. Your game's own files are kept, so it can all be undone.
 3. Start Stoneshard as usual. The main menu has a Mods button.
 
 Re-running the installer from a newer release updates an existing installation.

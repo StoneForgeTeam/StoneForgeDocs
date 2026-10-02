@@ -17,4 +17,5 @@
 * [Building and testing](development/building-and-testing.md)
 * [Developer host and live probe](development/developer-host.md)
 * [Third-party native binaries](development/third-party-binaries.md)
+* [Releasing](development/releasing.md)
 * [Repository layout](development/repositories.md)
