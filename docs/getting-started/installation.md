@@ -5,7 +5,7 @@
 * Stoneshard (Steam), on the **VM modbranch**.
 * The **.NET 10 Runtime, x64** to play with mods: [download](https://dotnet.microsoft.com/download/dotnet/10.0). The installer tells you if it's missing.
 
-MSL is not required. StoneForge uses UndertaleModLib 0.9.2.0 and Underanalyzer directly to patch game data. Game data is read from your local install.
+StoneForge uses UndertaleModLib 0.9.2.0 and Underanalyzer directly to patch game data. Game data is read from your local install.
 
 ## Install
 
