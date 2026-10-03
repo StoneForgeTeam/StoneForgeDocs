@@ -32,7 +32,18 @@ public class ExampleMod : IStoneMod
 }
 ```
 
-Inside the mod's own namespace that's just `Gml.Add(...)`; from another namespace, `ExampleMod.Gml.Add(...)`. A folder name that isn't a C# name is turned into one: `mods\my-cool mod` gives `MyCoolMod.Gml`. Don't name a class of your own `Gml` in that namespace; the generator reports the clash.
+Inside the mod's own namespace that's just `Gml.Add(...)`; from another namespace, `ExampleMod.Gml.Add(...)`. A folder name that isn't a C# name is turned into one: `mods\my-cool mod` gives `MyCoolMod.Gml`. `Gml` is a `public static partial class`, generated as one file per GML file (`GML\Add.gml` gives `Add.g.cs`) plus a shared `Gml.g.cs`. To add members of your own to it, declare it the same way:
+
+```csharp
+namespace ExampleMod;
+
+public static partial class Gml
+{
+    public static double AddTwice(double left, double right) => Twice(Add(left, right));
+}
+```
+
+A non-partial class of your own named `Gml` in that namespace clashes with the bindings, and the generator reports it.
 
 There's nothing else to set up: no manifest, no IDs or versions. A mod's GML can only be called from that mod.
 
