@@ -44,6 +44,23 @@ The game's kinds of damage are generated as `DamageType.Shock`, `DamageType.Fire
 | `Log` | Whether the combat log says so (default: yes). |
 | `Name` | What dealt it, in the combat log (default: the source's name). |
 
+## Attacks and plain hits
+
+To have one unit attack another with its weapon, as the game resolves it - hit, dodge, block, crit, its damage, counterattacks - and the attacker's turn taken:
+
+```csharp
+Combat.Attack(attacker, target);                 // as its turn chose it
+Combat.Attack(attacker, target, forced: true);   // a forced attack: its turn is left alone
+```
+
+`Combat.Hit(target, amount, source)` takes health off a unit as the game's plain damage does: the flash and the number, its morale, its reaction to being hit (turning on `source`), with no damage types or resistances. Use `Combat.Damage` for those.
+
+## Kills and factions
+
+A unit's **damage list** records who fought it, for who gets the kill. `Combat.DamageShare(unit, attacker)` is how much of it one attacker has (more than 0: they took part); `Combat.AddDamageShare(unit, attacker, amount)` adds one.
+
+`Factions.Join(unit)` puts a unit in its faction's list (its own faction variables say which), so enemies hostile to that faction go for it and its allies don't; `Factions.Leave(unit)` takes it out.
+
 ## Damage of your own
 
 A kind of your own inherits one of the game's (from `StoneForge.GameDamageTypes`) and is dealt as it, with its resistance and effects, changing what it likes:

@@ -26,7 +26,8 @@ if (player != null)
 | `First<T>(GameObjectId obj)` | The first instance of an object (or a child of it), or `null`. |
 | `All<T>(GameObjectId obj)` | Every instance, as `T`. |
 | `All(GameObjectId obj)`, `All(int objectIndex)`, `All(GameObject obj)` | Every instance, untyped (the last for a [mod's own object](../content/game-objects.md)). |
-| `Nearest<T>(x, y, GameObjectId obj)` | The one nearest a point. |
+| `Nearest<T>(x, y, GameObjectId obj)`, `Nearest(x, y, int objectIndex)` | The one nearest a point. |
+| `Count(int objectIndex)` | How many there are (not those culled). |
 
 ```csharp
 foreach (var enemy in Instances.All<GameInstance>(GameObjectId.o_enemy))
@@ -59,6 +60,7 @@ The generated classes add each object's own variables, the ones its events assig
 
 On a typed instance, set variables by name with `Set`: `player.Instance.Set("my_flag", true)`. C# won't let you assign through the indexer of a value a property returns (`player.Instance["my_flag"] = true` doesn't compile); a local or field works either way.
 | `Exists`, `IsNone`, `Id`, `Instance.FromId(id)` | Whether it's there; the GameMaker id; an instance from an id. |
+| `Instance.Of(value)` | The instance a value the game keeps names - a reference, or its id as a number (a unit's target, an effect's owner) - or none (`noone`, `-4`, `undefined`). |
 | `As<T>()` | As a generated class: `instance.As<o_player>()`. |
 | `Persist()` | A reference by id, safe to keep between callbacks (see below). |
 | `Destroy(runDestroyEvent = true)` | Remove it, culled or not. |

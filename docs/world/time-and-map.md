@@ -50,6 +50,7 @@ if (WorldMap.Here is { } here)
 | `PlayerCell`, `Here` | The cell the player is on. |
 | `Tile(x, y)` | Any cell. |
 | `Floor` | The dungeon floor the player is on (0 on the surface). |
+| `DungeonFloor` | The floor as the game numbers it for the dungeon's own records (its seeds, its floors' layouts). |
 | `Place` | Where the player is, as one string, the same in every game for the same spot: `"r_globalmap_forest#f2@12_7"` (room, dungeon floor, cell). |
 
 | `WorldTile` | |
@@ -60,5 +61,6 @@ if (WorldMap.Here is { } here)
 | `Seeds` | The seeds its areas are built from: `Layout`, `Growth`, `Mobs`, `Preset`, `Containers`, `Trade` (`-1`: not visited yet; `-2`: to be rolled again). The same seed builds the same area. |
 | `Location` | The location here, by the game's key (`"Osbrook"`...), or `null`. |
 | `Dungeon` | The cell's dungeon (`WorldDungeon`), or `null`: its values (`this[key]`, `Keys`), nested maps and lists (`GetMap`, `GetList`, `SetMap`, `SetList`). |
+| `SetDungeonValue(key, value)`, `SetDungeonMap(key, map)`, `SetDungeonList(key, list)` | Set a value of the cell's dungeon as the game does, making the dungeon if the cell has none yet. |
 
 Writes go through the game's own scripts, so anything hooking them sees them.

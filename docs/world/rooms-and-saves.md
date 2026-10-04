@@ -15,7 +15,7 @@ if (Gm.InGame && !Game.IsBusy)
 | `Current`, `CurrentName` | The room the game is in (`"r_globalmap_forest"`). |
 | `InMainMenu`, `IsChanging` | |
 | `Change(room, saveLocation, fade)` | Another room of the game being played, as a door does. The room being left is saved first, unless `saveLocation` is false. By index or name. |
-| `ToMainMenu(save)` | Back to the main menu, as the Esc menu's Exit does - or, with `save`, as Save and Exit does. |
+| `ToMainMenu(save)` | Back to the main menu, as the Esc menu's Exit does - or, with `save`, through the game's own Save and Exit (so mods hooking it see it). |
 | `LoadSave(save)` | Load a save, as the save menu does (from the main menu, or from a game, left without saving). |
 | `StartNew(prologue, permadeath)` | A new game, from the main menu, as its New Game buttons do. |
 
@@ -79,6 +79,8 @@ if (SaveData.Available)
 | `Section(name)`, `SectionList(name)` | A section as a map (`"gameDataMap"`) or list (`"inventoryDataList"`). |
 | `ToJson()`, `ToJson(sections)`, `CharacterJson()` | As JSON, as the game writes it. |
 | `ModMap(key)` | A map of your own in the save data, saved and loaded with the game. |
+| `Save(kind)` | Runs the game's save step now: the character collected into the save data, then the save written as `SaveKind.Auto` (or another kind). No fade, no room change. |
+| `WriteTo(save)` | Writes the save data as it is now over a save already on disk (its data only), to add to one just made. |
 
 ### Keeping a mod's own data in saves
 

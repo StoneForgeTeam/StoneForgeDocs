@@ -23,7 +23,9 @@ if (Locations.Here is var (locationTag, roomTag) && Locations.Get(locationTag) i
 | `Locations` | |
 |---|---|
 | `Available`, `Tags` | Whether there are locations (a game); every location with saved state. |
-| `Get(tag)`, `At(x, y)` | A location by tag or world-map cell. |
+| `Get(tag)`, `At(x, y)` | A location by tag or world-map cell (`null` if it has no saved state). |
+| `TagAt(x, y)` | The tag the game gives a cell's location (`"12_7"`), whether or not there's one there yet. |
+| `Exists(tag)` | Whether the game has a location by this tag: its rooms have been made, or stored. |
 | `Here` | Where the player is: the location's and room's tags. |
 | `Store(state)` | Put a saved state (perhaps another game's) where the game keeps it, so the next visit loads it. |
 

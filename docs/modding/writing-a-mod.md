@@ -11,7 +11,7 @@ A mod is a folder in `Stoneshard\mods`: its `mod.json`, its C# source (`*.cs`, i
   "version": "1.0.0",
   "author": "you",
   "description": "What it does, in a sentence or two.",
-  "stoneforge": "0.4.0"
+  "stoneforge": "0.5.0"
 }
 ```
 
@@ -21,8 +21,12 @@ A mod is a folder in `Stoneshard\mods`: its `mod.json`, its C# source (`*.cs`, i
 | `name` | required | Shown in the Mods window, its log lines and "Mod: ..." on its items. |
 | `version` | required | Your mod's version. |
 | `author`, `description` | optional | Shown in the Mods window. |
-| `stoneforge` | optional | The StoneForge version it needs, at least (`"0.4.0"`). An older StoneForge doesn't load it and says so. |
+| `stoneforge` | optional | The StoneForge version it needs, at least (`"0.5.0"`). An older StoneForge doesn't load it and says so. `"latest"` marks a mod in development: see below. |
 | `trusted` | optional | `true` asks for full access: its own DLLs, the whole of .NET and no sandbox. It runs only once the player allows it in the Mods window. See [Trusted mods](../core/mod-context.md#trusted-mods). |
+
+### Mods in development: "latest"
+
+While you develop a mod against StoneForge's `main` - between releases, for its newest API - set `"stoneforge": "latest"`. Any StoneForge loads it, the version check is skipped, and the log calls it a development build. In code, `context.Manifest.InDevelopment` says so. When you release the mod, set the version of StoneForge it was built against.
 
 Without a valid `mod.json` the folder isn't loaded; the Mods window says what's wrong. Two folders with the same `id`: the second isn't loaded. Code reads the manifest as `context.Manifest`.
 

@@ -11,6 +11,7 @@
 
 * [The mod context](core/mod-context.md)
 * [Settings](core/settings.md)
+* [The profiler](core/profiler.md)
 * [API lifetime rules](modding/api-lifetime-rules.md)
 
 ## GML and C# code
@@ -36,10 +37,15 @@
 * [Screens and elements](ui/screens-and-elements.md)
 * [Windows](ui/windows.md)
 * [Drawing and input](ui/drawing-and-input.md)
+* [Dialogs and blackouts](ui/dialogs.md)
 * [The main menu](ui/main-menu.md)
+* [The Esc menu](ui/esc-menu.md)
+* [Right-click menus](ui/context-menus.md)
 
 ## World
 
+* [The player](world/player.md)
+* [Units and turns](world/units.md)
 * [Time and the world map](world/time-and-map.md)
 * [Rooms and saves](world/rooms-and-saves.md)
 * [Locations and ground items](world/locations-and-items.md)
