@@ -1,4 +1,4 @@
-# Writing a mod (0.1.0)
+# Writing a mod
 
 A mod is a folder in `Stoneshard\mods`: its `mod.json`, its C# source (`*.cs`, in any subfolders), its pictures and sounds in `Assets\`, and optionally its GML in `GML\` (see [GML bindings](gml-bindings.md)). StoneForge compiles and checks the source when the game starts. A folder holds one mod.
 
@@ -11,7 +11,7 @@ A mod is a folder in `Stoneshard\mods`: its `mod.json`, its C# source (`*.cs`, i
   "version": "1.0.0",
   "author": "you",
   "description": "What it does, in a sentence or two.",
-  "stoneforge": "0.1.0"
+  "stoneforge": "0.4.0"
 }
 ```
 
@@ -21,7 +21,8 @@ A mod is a folder in `Stoneshard\mods`: its `mod.json`, its C# source (`*.cs`, i
 | `name` | required | Shown in the Mods window, its log lines and "Mod: ..." on its items. |
 | `version` | required | Your mod's version. |
 | `author`, `description` | optional | Shown in the Mods window. |
-| `stoneforge` | optional | The StoneForge version it needs, at least (`"0.1.0"`). An older StoneForge doesn't load it and says so. |
+| `stoneforge` | optional | The StoneForge version it needs, at least (`"0.4.0"`). An older StoneForge doesn't load it and says so. |
+| `trusted` | optional | `true` asks for full access: its own DLLs, the whole of .NET and no sandbox. It runs only once the player allows it in the Mods window. See [Trusted mods](../core/mod-context.md#trusted-mods). |
 
 Without a valid `mod.json` the folder isn't loaded; the Mods window says what's wrong. Two folders with the same `id`: the second isn't loaded. Code reads the manifest as `context.Manifest`.
 
@@ -65,5 +66,7 @@ A mod's ID has no `__` and keys don't start with `_`, so no two mods' content ca
 
 ## Next steps
 
-* [GML bindings](gml-bindings.md): call GML functions shipped with your mod from C#.
-* [API lifetime rules](api-lifetime-rules.md): context content APIs, instances, handles and asset ownership.
+* [The mod context](../core/mod-context.md): loading, ticking, logging, pictures, files.
+* [How GML maps to C# code](../gml/overview.md): how StoneForge's API reaches into the game.
+* [Items](../content/items.md), [buffs](../content/buffs.md) and [skills](../content/skills.md): content of your own.
+* [Screens and elements](../ui/screens-and-elements.md): UI of your own.

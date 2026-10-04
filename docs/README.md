@@ -5,7 +5,11 @@ StoneForge is a C# mod loader for Stoneshard on Windows. Mods are source folders
 ## Where to start
 
 * **Playing with mods:** [Installation](getting-started/installation.md).
-* **Writing a mod:** [Writing a mod](modding/writing-a-mod.md) covers the manifest, the mod class and content IDs. [GML bindings](modding/gml-bindings.md) and [API lifetime rules](modding/api-lifetime-rules.md) go further. The [Example Mod](https://github.com/StoneForgeTeam/ExampleMod) shows items, buffs, skills, UI and GML.
+* **Your first mod:** [Writing a mod](modding/writing-a-mod.md), then [the mod context](core/mod-context.md). The [Example Mod](https://github.com/StoneForgeTeam/ExampleMod) shows most of the API in one mod.
+* **How it reaches into the game:** [How GML maps to C# code](gml/overview.md): values, instances, calling the game's scripts and built-ins, and hooking its scripts and events.
+* **Adding content:** [items](content/items.md), [buffs](content/buffs.md), [skills](content/skills.md), [damage](content/combat.md), [effects](content/fx.md) and [game objects](content/game-objects.md).
+* **UI:** [screens and elements](ui/screens-and-elements.md), [windows](ui/windows.md), [drawing and input](ui/drawing-and-input.md), [the main menu](ui/main-menu.md).
+* **The world:** [time and the world map](world/time-and-map.md), [rooms and saves](world/rooms-and-saves.md), [locations and ground items](world/locations-and-items.md), [character looks](world/character-look.md).
 * **Working on StoneForge itself:** [Building and testing](development/building-and-testing.md), the [developer host](development/developer-host.md) and the [repository layout](development/repositories.md).
 
 ## Repositories
