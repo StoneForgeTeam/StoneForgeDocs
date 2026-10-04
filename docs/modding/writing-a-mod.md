@@ -28,14 +28,12 @@ Without a valid `mod.json` the folder isn't loaded; the Mods window says what's 
 
 ## The mod class
 
-Mod editor projects target `net10.0` and reference the installed `dotnet/StoneForge.API.dll`. The standalone [ExampleMod repository](https://github.com/StoneForgeTeam/ExampleMod) also loads the installed GML generator. Set `STONESHARD_DIR` to your game folder or pass `-p:StoneForgeSdkDir="C:\path\to\Stoneshard\dotnet"` when building it.
-
 ```csharp
 using StoneForge;
 
-namespace ExampleMod;
+namespace MyMod;
 
-public class ExampleMod : IStoneMod
+public class MyMod : IStoneMod
 {
     public void Load(ModContext context) => context.Log("Hello from " + context.Name);
     public void Unload() { }
@@ -43,6 +41,73 @@ public class ExampleMod : IStoneMod
 ```
 
 One public `IStoneMod` class per folder. Its name, version and so on come from `mod.json`.
+
+## The editor project
+
+The game compiles a mod's `.cs` files itself when it starts, so a mod needs no build step. A project file is still worth having: it gives your editor (Visual Studio, Rider, VS Code) autocomplete, the generated game API and errors as you type. Nothing it builds is loaded.
+
+A mod folder, with its project:
+
+```
+Stoneshard\mods\MyMod  mod.json
+  MyMod.csproj
+  MyMod.cs
+  Items\...
+  Assets\         pictures and sounds (icon.png for the Mods window)
+  GML\            optional: GML functions of your own
+```
+
+`MyMod.csproj`, as the [Example Mod](https://github.com/StoneForgeTeam/ExampleMod)'s:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- For editing in an IDE only: the game compiles this folder's .cs files itself when it starts (and checks
+       them - only what's safe for a mod is allowed). Nothing built here is loaded. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <!-- As the game compiles mods: no implicit usings, C# 12. -->
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+    <PlatformTarget>x64</PlatformTarget>
+    <!-- StoneForge as installed in the game: STONESHARD_DIR, else the game folder this mod is in. -->
+    <StoneForgeSdkDir Condition="'$(StoneForgeSdkDir)' == '' and '$(STONESHARD_DIR)' != ''">$(STONESHARD_DIR)\dotnet</StoneForgeSdkDir>
+    <StoneForgeSdkDir Condition="'$(StoneForgeSdkDir)' == ''">$(MSBuildThisFileDirectory)..\..\dotnet</StoneForgeSdkDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- StoneForge.API as installed in the game: what the game compiles mods against. -->
+    <Reference Include="StoneForge.API">
+      <HintPath>$(StoneForgeSdkDir)\StoneForge.API.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <!-- GML functions of your own (the GML folder) as C#: the generator makes MyMod.Gml from them, as the game does. -->
+    <Analyzer Include="$(StoneForgeSdkDir)\StoneForge.GmlGenerator.dll" />
+    <AdditionalFiles Include="GML\**\*.gml" />
+  </ItemGroup>
+
+  <Target Name="ValidateStoneForgeSdk" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(StoneForgeSdkDir)\StoneForge.API.dll') or !Exists('$(StoneForgeSdkDir)\StoneForge.GmlGenerator.dll')"
+           Text="Install StoneForge and set STONESHARD_DIR to the game folder, or pass -p:StoneForgeSdkDir=path-to-its-dotnet-folder." />
+  </Target>
+
+</Project>
+```
+
+It finds StoneForge in one of three ways:
+
+- **Inside the game:** a mod in `<Stoneshard>\mods\MyMod` finds `<Stoneshard>\dotnet` on its own.
+- **Elsewhere** (a Git checkout, say): set `STONESHARD_DIR` to the game folder before opening your editor:
+  ```powershell
+  $env:STONESHARD_DIR = 'C:\Program Files (x86)\Steam\steamapps\common\Stoneshard'
+  dotnet build MyMod.csproj
+  ```
+- **Or** pass `-p:StoneForgeSdkDir="C:\path\to\Stoneshard\dotnet"`.
+
+The project needs the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0). `ImplicitUsings` and `LangVersion` match how the game compiles mods, so code that builds here builds in the game - though the game's sandbox can still refuse what isn't allowed for mods (files, threads, reflection...), which the editor doesn't check. The folder's name decides the generated GML class: `MyMod.Gml` (see [Your own GML](gml-bindings.md)).
+
+When copying a mod into the game from elsewhere, leave out `bin`, `obj`, `.git` and `.vs`.
 
 ## Content IDs
 
