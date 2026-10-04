@@ -2,7 +2,7 @@
 
 Documentation for [StoneForge](https://github.com/StoneForgeTeam/StoneForge), the C# mod loader for Stoneshard, published as a self-hosted site and with [GitBook](https://www.gitbook.com/).
 
-The pages are Markdown under [`docs/`](docs/). [`docs/SUMMARY.md`](docs/SUMMARY.md) is the table of contents, and [`.gitbook.yaml`](.gitbook.yaml) points GitBook at that folder.
+The pages are Markdown under [`docs/`](docs/), with [`docs/SUMMARY.md`](docs/SUMMARY.md) as the table of contents. For GitBook, [`gitbook-docs.yaml`](gitbook-docs.yaml) maps the site's one space to `docs/`, and [`docs/.gitbook.yaml`](docs/.gitbook.yaml) says how to read it.
 
 ## Publishing
 
@@ -25,7 +25,7 @@ The [Publish docs](.github/workflows/pages.yml) workflow builds every pull reque
 ### GitBook
 
 1. In GitBook, create a space, open **Configure** and choose **GitHub Sync**.
-2. Select `StoneForgeTeam/StoneForgeDocs` and the `main` branch. GitBook reads `.gitbook.yaml` and builds the space from `docs/`.
+2. Select `StoneForgeTeam/StoneForgeDocs` and the `main` branch, with the project directory left as the repository root. GitBook reads `gitbook-docs.yaml` there, then builds the space from `docs/` using `docs/.gitbook.yaml`.
 3. Changes pushed to `main` appear on the site; edits made in GitBook are committed back to the repository.
 
 ## Editing
