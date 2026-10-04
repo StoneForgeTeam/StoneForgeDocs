@@ -1,0 +1,12 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: StoneForge
+  structure:
+    # (GitBook matches the space by its key: keep it once the site is live. Rename with title, move with path.)
+    - type: space
+      key: stoneforge
+      title: StoneForge
+      path: docs
+      default: true
+      content:
+        directory: ./docs
