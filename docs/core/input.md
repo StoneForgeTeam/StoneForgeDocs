@@ -28,7 +28,7 @@ if (Mouse.Pressed() && Mouse.Over(x, y, 100, 26))
 
 | `Mouse` | |
 |---|---|
-| `X`, `Y` | Where it is, in GUI coordinates (as [`Draw`](../ui/drawing.md)). |
+| `X`, `Y`, `Position` | Where it is, in GUI coordinates (as [`Draw`](../ui/drawing.md)); `Position` both as a `Point`. |
 | `Pressed(button)`, `Released(button)`, `Down(button)` | `Mouse.Left` (default), `Right`, `Middle`. |
 | `Over(x, y, w, h)` | Whether it's over a rectangle. |
 | `Wheel` | `1` up, `-1` down, `0` none, this frame. |
@@ -42,15 +42,15 @@ if (Mouse.Pressed() && Mouse.Over(x, y, 100, 26))
 ```csharp
 if (Mouse.ClickedWorld())
 {
-    var (cellX, cellY) = Mouse.Cell;
-    context.Log(Mouse.Unit.IsNone ? $"Clicked empty cell {cellX}, {cellY}" : $"Clicked {ActionsLog.NameOf(Mouse.Unit)}");
+    Cell cell = Mouse.Cell;
+    context.Log(Mouse.Unit.IsNone ? $"Clicked empty cell {cell}" : $"Clicked {ActionsLog.NameOf(Mouse.Unit)}");
 }
 ```
 
 | | |
 |---|---|
-| `WorldX`, `WorldY` | Where it is in the room's coordinates (its camera taken into account), as units' `x` / `y` are. |
-| `Cell` | The 26-pixel grid cell it's over, as units stand on it. |
+| `WorldX`, `WorldY`, `World` | Where it is in the room's coordinates (its camera taken into account), as units' `x` / `y` are; `World` both as a `Point`. |
+| `Cell` | The 26-pixel grid [`Cell`](../world/units.md#cells) it's over, as units stand on it. |
 | `Unit` | The unit standing on that cell: an enemy, an NPC, the player, another mod's unit; none for an empty cell. |
 | `OverGameUI`, `OverModUI`, `OverUI` | Whether it's over the game's UI (a window, the bottom panel, a button), a mod's UI, or either. |
 | `HasFocus` | Whether the game's window has the focus. |

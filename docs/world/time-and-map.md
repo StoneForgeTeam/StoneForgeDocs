@@ -47,7 +47,7 @@ if (WorldMap.Here is { } here)
 |---|---|
 | `Available`, `InPrologue` | |
 | `Width`, `Height` | Cells across and down. |
-| `PlayerCell`, `Here` | The cell the player is on. |
+| `PlayerCell`, `Here` | The cell the player is on, as a `WorldTile` (the world map's cells are `WorldTile`s, not the room's `Cell`s). |
 | `Tile(x, y)` | Any cell. |
 | `Floor` | The dungeon floor the player is on (0 on the surface). |
 | `DungeonFloor` | The floor as the game numbers it for the dungeon's own records (its seeds, its floors' layouts). |
