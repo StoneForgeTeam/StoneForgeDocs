@@ -33,7 +33,7 @@ Drawing outside a draw pass does nothing.
 | `SpriteSliced(sprite, frame, x, y, w, h, cap)` | Stretched but for its ends (a button). |
 | `SpriteNineSlice(sprite, frame, x, y, w, h, borders)` | 9-sliced to any size (a window frame). |
 | `SpriteExt(sprite, frame, x, y, xscale, yscale, angle, colour, alpha)` | A sprite's frame as GameMaker draws one: scaled, turned, tinted. |
-| `SpriteWidth`, `SpriteHeight`, `SpriteOrigin` | A sprite's size in pixels; the point of it drawn at `(x, y)`. |
+| `SpriteWidth`, `SpriteHeight`, `SpriteOrigin` | A sprite's size in pixels; the point of it drawn at `(x, y)`, as a `Point`. |
 | `SpriteExists`, `SpriteName` | Whether a sprite exists; its name. |
 
 | Colours | |

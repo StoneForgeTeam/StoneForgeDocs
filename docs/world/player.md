@@ -20,7 +20,7 @@ if (Player.Exists && !Player.InCombat)
 | `IsHuntedBy(unit)` | Whether a unit is after it. |
 | `GiveXp(xp, killed)` | Gives XP as the game does (bonuses, levelling up). With `killed`, the combat log says so as for a kill of that unit. Returns the XP it got. |
 | `KillXp(unit)` | The XP a unit's death is worth to the player, as the game works it out. |
-| `WalkTo(x, y)` | Walks it to a room position, as a click on the world does: its path, a cell a turn. |
+| `WalkTo(cell)` | Walks it to a cell, as a click on the world does: its path, a cell a turn. |
 | `CrossAreaEdge()` | Takes it across the area's edge into the next one on the world map, as walking off it does. |
 | `AddStat(stat, amount)` | Adds to a statistic on its character page: `"contractsFailed"`, `"attacks"`... |
 | `ChangePsyche(what, amount, reason)` | Changes its psyche as the game does: `"MoraleSituational"`, `"Sanity"`..., with the game's key for why. |
@@ -32,7 +32,7 @@ Player.GiveXp(xp, killed: enemy);
 
 // Walk to where the mouse is.
 if (Mouse.ClickedWorld(Mouse.Right))
-    Player.WalkTo(Mouse.WorldX, Mouse.WorldY);
+    Player.WalkTo(Mouse.Cell);
 ```
 
 ## Journal and contracts
