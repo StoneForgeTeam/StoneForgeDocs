@@ -14,6 +14,18 @@ Weapons, armour and passives get an `Attack` in their events (`OnHit`, `OnAttack
 | `Killed` | The target has no health left. |
 | `DealExtraDamage(amount)` | More damage now, straight off the target's health. |
 
+### Every attack
+
+`Combat.OnAttack` runs for every attack resolved, anyone's (a melee blow or a shot, a hit, crit, block, dodge or fumble), after its damage is dealt. `Combat.OnHit` runs for those that strike: a hit or a crit. The attacker and target are kept by id, so the `Attack` can be kept.
+
+```csharp
+Combat.OnHit(context, attack =>
+{
+    if (attack.ByPlayer && attack.Result == AttackResult.Crit)
+        attack.DealExtraDamage(3);
+});
+```
+
 ## Dealing damage
 
 `Combat.Damage` deals damage as the game does: the target's protection, armour piercing and resistances apply, the number shows over it, the combat log says so, and with a source, the hit is the source's (for who attacked whom, crimes and kills).

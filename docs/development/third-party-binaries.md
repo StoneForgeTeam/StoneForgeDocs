@@ -4,7 +4,7 @@
 Paths and commands on this page are relative to a checkout of the [StoneForge repository](https://github.com/StoneForgeTeam/StoneForge).
 {% endhint %}
 
-Aurie (`AurieCore.dll`, `AuriePatcher.exe`) and YYToolkit (`YYToolkit.dll`) are prebuilt in `lib/Aurie` and `lib/YYToolkit`, so packaging needs nothing outside the repository. Each folder's README names the upstream commit, the SHA-256 of the binaries and, for Aurie, the patch applied (`lib/Aurie/stoneforge.patch`: modules load from `<game>\aurie`). Both are AGPL-3.0; releases include the licences, the patch and those notes under `LICENSES\`.
+Aurie (`AurieCore.dll`, `AuriePatcher.exe`) and YYToolkit (`YYToolkit.dll`) are prebuilt in `lib/Aurie` and `lib/YYToolkit`, so packaging needs nothing outside the repository. Each folder's README names the upstream commit, the SHA-256 of the binaries and the patch applied: Aurie's (`lib/Aurie/stoneforge.patch`) loads modules from `<game>\aurie`, and YYToolkit's (`lib/YYToolkit/stoneforge.patch`) stops its GML error hook from naming scripts (which faults on this GameMaker version and crashed the game on every GML error) and opens its console window only on request (see [Crash windows and reports](crash-reports.md)). Both are AGPL-3.0; releases include the licences, the patches and those notes under `LICENSES\`.
 
 To rebuild them from source (needs git and Visual Studio's C++ tools; clones into `build\.thirdparty`):
 

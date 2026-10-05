@@ -54,6 +54,20 @@ A skill's key must be a **string literal** in the `base(...)` call. StoneForge's
 
 `SkillCast` has `Caster`, `Target` (the unit, or the game's mark on the tile aimed at; the caster for a skill without a target), `X`, `Y`, `IsCrit` (a miracle: a spell's critical cast) and `Skill` (its instance).
 
+### Any skill used
+
+`Skills.OnUsed` runs as any skill has been used, the player's or a unit's, the game's or a mod's: its energy spent, its cooldown started, a spell's miracle or fumble rolled. Its skill, caster and target are kept by id.
+
+```csharp
+Skills.OnUsed(context, cast =>
+{
+    if (Units.IsPlayer(cast.Caster.Instance) && cast.IsCrit)
+        context.Log("A miracle!");
+});
+```
+
+It isn't told of the plain actions that are skills in name only: moving, throwing an item, crafting, setting a trap, dousing, disarming, setting up a bed or a dummy, a shot's attack mode.
+
 ## A passive skill
 
 A passive is always on once learnt. It changes the character's stats, shown in the character sheet as the game's passives are, and reacts to fights:

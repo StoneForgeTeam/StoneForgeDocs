@@ -149,4 +149,7 @@ A consumable's key must be a **string literal** in the `base(...)` call. StoneFo
 | `Give(consumable, count)` | Give some of a consumable, stacked. |
 | `Give(name, ...)` | Give a game item by name (`"Drifter Sword"`), a mod's by id (`"othermod:Blade"`), or another game item by its `o_inv_` object name less `o_inv_` (`"wine"`). |
 | `Exists(name)` | Whether the game knows a weapon or armour by that name. |
+| `Items.Get<T>()` | The mod item of type `T` a mod added (throws if none was). |
 | `Stat(name, column)` | A weapon's or armour's value in its table: `context.Items.Stat("Drifter Sword", WeaponColumn.Price)`. |
+
+To give items with values of their own (a condition, a mod's data), take them away, or put them in chests, see [Inventory and containers](../world/inventory-and-containers.md).

@@ -35,6 +35,8 @@ Game.CallBuiltin("draw_sprite_ext", sprite, frame, x, y, 1, 1, 0, Draw.White, 1)
 
 Built-ins that reach outside the game - files, the network, other programs - aren't available to mods and throw `UnauthorizedAccessException`. Use [`context.Files`](../core/mod-context.md#files) for files. A mod marked `"trusted": true` in its `mod.json`, and allowed by the player, can use `CallBuiltinUnrestricted`.
 
+`CallBuiltin` is for GameMaker's built-in functions only. A name that isn't one (a script's, say) throws a `GameCallException` ("no built-in function named ..."): call scripts with `Game.CallScript`.
+
 The common built-ins are typed in `Gm`: `Gm.InstanceExists`, `Gm.InstanceNumber`, `Gm.Create<T>`, `Gm.AssetGetIndex`, `Gm.ObjectGetName`, `Gm.AudioPlaySound(Sound...)`, `Gm.CurrentTime`, `Gm.Room`, `Gm.ShowDebugMessage`.
 
 ## Global variables

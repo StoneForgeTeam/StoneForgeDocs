@@ -1,6 +1,6 @@
 # The player
 
-`Player` is the player's character: its attributes as the game reads them, whether enemies are after it, experience as the game gives it, its stats and psyche, and walking it somewhere. It's there only in a game: check `Player.Exists`.
+`Player` is the player's character: its attributes as the game reads them, whether enemies are after it, experience as the game gives it, its stats and psyche, and walking it somewhere; and as it dies or levels up. It's there only in a game: check `Player.Exists`.
 
 ```csharp
 if (Player.Exists && !Player.InCombat)
@@ -34,6 +34,44 @@ Player.GiveXp(xp, killed: enemy);
 if (Mouse.ClickedWorld(Mouse.Right))
     Player.WalkTo(Mouse.Cell);
 ```
+
+## Death and levelling up
+
+```csharp
+Player.OnDying(context, () =>
+{
+    if (!_secondWind)
+        return false;            // let the game's death happen
+    _secondWind = false;
+    Player.Instance.Set("HP", 20);
+    return true;                 // stop it: bringing them back is the mod's
+});
+Player.OnLevelUp(context, level => context.Log($"Level {level}!"));
+```
+
+| | |
+|---|---|
+| `OnDying(context, () => bool)` | The player is about to die (their health gone, nothing left that saves them), before the game's death: the corpse, the death screen, the end of a permadeath character. Return true to stop it. The player stays as they are: their health, and a place to come back to, are the mod's to give. Any handler returning true stops it. |
+| `OnLevelUp(context, level => ...)` | The player levels up in play: the level it's at now. Several levels at once count once. Not a level a save loads with. |
+
+## Quests
+
+```csharp
+if (Quests.IsCompleted("BlackTablet"))
+    context.Log("The tablet's been dealt with");
+Quests.OnCompleted(context, quest => context.Log($"Done: {quest}"));
+Quests.OnProgress(context, (quest, task, value) => context.Log($"{quest}: {task} is {value}"));
+```
+
+| `Quests` | |
+|---|---|
+| `Get(quest)` | A quest's data (the game's, live), by its id (`"BlackTablet"`); `null` if there's none. |
+| `IsStarted(quest)`, `IsCompleted(quest)`, `IsFailed(quest)` | Where it is. |
+| `OnStarted(context, quest => ...)` | A quest starts. |
+| `OnProgress(context, (quest, task, value) => ...)` | One of a quest's tasks moves on: its count now, or `-1` done, `-2` failed. |
+| `OnCompleted(context, quest => ...)`, `OnFailed(context, quest => ...)` | A quest is done; has failed. |
+
+They run only when something changed, not for every call that would.
 
 ## Journal and contracts
 
