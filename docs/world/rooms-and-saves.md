@@ -19,6 +19,15 @@ if (Gm.InGame && !Game.IsBusy)
 | `LoadSave(save)` | Load a save, as the save menu does (from the main menu, or from a game, left without saving). |
 | `StartNew(prologue, permadeath)` | A new game, from the main menu, as its New Game buttons do. |
 
+### Entering and leaving rooms
+
+```csharp
+Rooms.OnEntered(context, room => context.Log($"Entered {Rooms.CurrentName}"));
+Rooms.OnLeaving(context, room => context.Log("Leaving"));
+```
+
+`Rooms.OnEntered` runs once the game has gone into a room of the game being played, on the frame after it started, its instances all set up. `Rooms.OnLeaving` runs as the game leaves one: its instances are still there, and the place is already saved if it's saved. Each floor of a dungeon counts, since it's the same room started again.
+
 ## Saves on disk: SaveSlots
 
 `SaveSlots` reads the saved games on disk, as the game's save menu shows them: character folders (slots, `"character_1"` up to 10), newest first, each with its info and its saves.
@@ -90,3 +99,17 @@ stash["gold"] = stash.Get("gold", 0) + 10;
 ```
 
 Use a key of your mod's own: the game's sections are the save data's other keys.
+
+### When saves are read and written
+
+```csharp
+SaveData.OnLoaded(context, save => context.Log($"Loaded {save.Name}"));
+SaveData.OnSaving(context, save => SaveData.ModMap("mymod_stash")["saved_at"] = Time.Turns);
+```
+
+| | |
+|---|---|
+| `SaveData.OnLoaded(context, save => ...)` | A save has been read: its data is the save data now, before the game sets itself up from it. Not when it couldn't be read. |
+| `SaveData.OnSaving(context, save => ...)` | A save is about to be written (saving, an autosave, an exit save): what's in the save data then goes to disk. |
+
+The world map's fog and paper are written into the save data only as the game saves. Call `WorldMap.Save()` before handing the save data to anything that will load it (see [the world map](time-and-map.md#the-world-map)).

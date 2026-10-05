@@ -38,6 +38,8 @@ if (Locations.Here is var (locationTag, roomTag) && Locations.Get(locationTag) i
 
 `LocationFlags` say what spawns afresh on the next visit: `Mobs`, `Npc`, `Corpses`, `LootRoom`, `LootDrop`, `Doors`, `ContainersRoom`... The game sets them when a location respawns.
 
+`Locations.OnSaved(context, preset => ...)` runs once the game has saved the place the player is leaving: the preset it saved, its entities and flags as they are now.
+
 ```csharp
 // Respawn this location's mobs and loot on the next visit.
 location.SetFlags(LocationFlags.Mobs | LocationFlags.LootRoom);
@@ -83,3 +85,10 @@ GroundItems.Spawn("wine", x, y, hop: true);
 | `InFlight`, `Flight`, `Fly(flight)`, `Land()` | Its hop through the air: read it, replay another item's (perhaps another game's), or land it now. |
 
 An item off screen (culled) is still there: reading or changing it wakes it for the moment and puts it back.
+
+```csharp
+GroundItems.OnAdded(context, item => context.Log($"{item.ObjectName} lands at ({item.X}, {item.Y})"));
+GroundItems.OnRemoved(context, item => context.Log($"{item.ObjectName} is gone"));
+```
+
+`GroundItems.OnAdded` runs as an item comes onto the ground in play (dropped or thrown by anyone, left by a kill, an arrow, or made by a mod) on the frame after it's made, its data set. `GroundItems.OnRemoved` runs as one leaves it (picked up, destroyed, taken by a mod) while it can still be read. Neither runs for the items a place has as it loads, or leaves behind as the room is left.

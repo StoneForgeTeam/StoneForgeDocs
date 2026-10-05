@@ -64,3 +64,31 @@ if (WorldMap.Here is { } here)
 | `SetDungeonValue(key, value)`, `SetDungeonMap(key, map)`, `SetDungeonList(key, list)` | Set a value of the cell's dungeon as the game does, making the dungeon if the cell has none yet. |
 
 Writes go through the game's own scripts, so anything hooking them sees them.
+
+`WorldMap.Save()` writes the world map's fog (which cells the player has seen) and its paper into the save data, as the game's save does. The save data holds them as of the last save otherwise (a new world's not at all), so call it before handing the save data to anything that will load it.
+
+## Map markers
+
+`MapMarkers` are the markers players put on the world map. They're read and set whether the map is open or closed.
+
+```csharp
+using System.Linq;
+
+var markers = MapMarkers.All().ToList();
+markers.Add(new MapMarker(MapMarkers.Sprites[4], 0, new Point(30 * MapMarkers.CellSize, 12 * MapMarkers.CellSize)));
+MapMarkers.Set(markers);
+
+MapMarkers.OnPlaced(context, marker => context.Log($"A marker on {marker.Tile.Tag}"));
+```
+
+| `MapMarkers` | |
+|---|---|
+| `All()` | Every marker on the world map (none without one). |
+| `Set(markers)` | Makes the markers these, in place of all there were. With the map open, they're made again on the spot, as the game places one. |
+| `Add(marker)`, `Remove(marker)` | Puts one on; takes the ones equal to it off (false if there were none). |
+| `Sprites` | The 12 sprites the map's menu offers, in its order. |
+| `CellSize` | 52: the world map's pixels to a cell. |
+| `MapOpen` | Whether the world map is open. |
+| `OnPlaced(context, marker => ...)`, `OnRemoved(context, marker => ...)` | The player places a marker on the open map, or takes one off (right-clicking it, or placing another over it), after the change. Not for markers a mod sets. |
+
+A `MapMarker` is its `Sprite`'s name, which `Image` of it, and its `Position` in world-map pixels (a `Point`), with the `Tile` it's on.

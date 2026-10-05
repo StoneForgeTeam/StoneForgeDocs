@@ -66,11 +66,27 @@ Units.Remove(dummy);
 |---|---|
 | `Create(obj, cell)` | A unit of an object on a cell, as the game spawns one; none if it wasn't made. |
 | `SetRecord(unit, record)` | Gives a unit one of the game's mob records: its type, stats, resistances and icons (`"Caravan Dummy"`, `"Bandit Thug"`...). |
-| `Remove(unit)` | Takes a unit out quietly: out of the grids and the turn list, the effects on it removed with it, then destroyed **without** its Destroy event - no loot, no corpse, no kill credit. |
+| `Remove(unit)` | Takes a unit out quietly: out of the grids, the turn list and its faction's list, the effects on it removed with it, then destroyed **without** its Destroy event - no loot, no corpse, no kill credit. Other units' references to it (their target, who last hit them...) are cleared, so their AI doesn't read a unit that's gone. |
 
 {% hint style="warning" %}
 Don't destroy a unit without its Destroy event yourself: effects left pointing at it crash the game when they read their target. `Units.Remove` takes them off first (`UnitEffects.RemoveAll`); do the same if you remove a unit another way.
 {% endhint %}
+
+## When units come and go
+
+```csharp
+Units.OnSpawned(context, unit => context.Log($"{ActionsLog.NameOf(unit)} appears"));
+Units.OnDied(context, (unit, killer) =>
+{
+    if (Units.IsPlayer(killer))
+        Player.GiveXp(10);
+});
+```
+
+| | |
+|---|---|
+| `Units.OnSpawned(context, unit => ...)` | A unit comes into play (summoned, spawned, made by a mod with `Create`), on the frame after it's made and set up. Not the units a place has as it loads, nor those a room is built with. |
+| `Units.OnDied(context, (unit, killer) => ...)` | A unit dies (its health gone), before it's destroyed, its loot dropped and its corpse left, so it can still be read. `killer` is its last attacker: the player or another unit; none if nobody. |
 
 ## Turns
 
@@ -81,17 +97,40 @@ Each turn the player's list of units to run (`o_player`'s enemy list) takes its 
 | `Units.EndTurn(unit, delay)` | Ends a unit's turn, as its own actions do. |
 | `Units.TurnsCount()` | How many units the turn list holds. |
 | `Units.RemoveFromTurns(unit => ..., betweenTurnsOnly)` | Takes units out of the turn list, so their AI isn't run. For a unit another game runs, say. By default only between turns, never while the turn walks the list. |
+| `Units.ReturnToTurns(units)` | Gives units back their own turns: their AI on, and in the turn list again. For units another game ran, now this one's to run. Their references to units that are gone are cleared first. |
 | `Turns.PassWorld()` | The world's turn passes (time, effects on everyone, regeneration), as the player's turn does. |
 | `Turns.RunUnits()` | The units in the turn list take their turns. |
 
-`Turns` is for a mod that keeps the world's clock itself, such as one following another game's turns.
+`Turns` is for a mod that keeps the world's clock itself, such as one following another game's turns. `Turns.OnTurn(context, () => ...)` runs after each world turn has passed: the player's action done, or waiting, or `PassWorld`.
 
 ## Doors
 
+`Doors` are the doors in a room that open and close: a house's, a crypt's.
+
 ```csharp
-Instance door = Doors.Nearest(Units.CellOf(Player.Instance));
-if (!door.IsNone)
-    Doors.Use(door);
+foreach (Instance door in Doors.All())
+    if (Doors.IsLocked(door))
+        Doors.SetOpen(door, true);   // unlocks it, and opens it as the game does
+
+Doors.OnChanged(context, (door, open) => context.Log(open ? "A door opens" : "A door closes"));
 ```
 
-`Doors.Nearest(cell)` (or a room position, `Doors.Nearest(point)`) finds the nearest way out - a door, stairs, a dungeon's entrance or exit - and `Doors.Use(door)` uses it as the player clicking it does: through it at once if the player can reach it, else walking there first.
+| `Doors` | |
+|---|---|
+| `All(includeCulled)` | The room's doors; off-screen ones too with `includeCulled` (their state can't be read until they're back: see [culling](../gml/instances.md#culling)). |
+| `IsDoor(instance)` | Whether an instance is a door. |
+| `IsOpen(door)`, `IsLocked(door)` | Whether it's open (or opening); whether it's locked. |
+| `SetOpen(door, open, unlock)` | Opens or closes it as the game does: its animation, sound and the noise units nearby hear, its collision following. Opening a locked door unlocks it, unless `unlock` is false (then it stays shut). |
+| `OnChanged(context, (door, open) => ...)` | A door starts opening or closing, whoever does it: the player, an NPC or enemy going through, the game's scripts, a mod. |
+
+## Exits
+
+`Exits` are the ways out of a place: an entrance, stairs, a dungeon's way in and out, a map edge.
+
+```csharp
+Instance exit = Exits.Nearest(Units.CellOf(Player.Instance));
+if (!exit.IsNone)
+    Exits.Use(exit);
+```
+
+`Exits.Nearest(cell)` (or a room position, `Exits.Nearest(point)`) finds the nearest way out, and `Exits.Use(exit)` uses it as the player clicking it does: through it at once if the player can reach it, else walking there first.

@@ -12,6 +12,6 @@ Keep the code checkouts as siblings, with the sample folder named `ExampleMod`. 
 
 The API, bridge and loader share runtime contracts. The patcher, DataDump and generators also depend on the same game-data and generated-code conventions. Keeping them together lets a change to these contracts be built, tested and released as one unit. Documentation lives in StoneForgeDocs; a StoneForge change that alters documented behavior should update the matching page for the same release.
 
-Third-party libraries remain pinned under `lib/`, with their licenses, source provenance and rebuild tooling. The small Aurie patch stays alongside its pin; YYToolkit is unmodified. Separate forks are unnecessary for the current scope. A dedicated Aurie fork would make sense if native changes grow enough to need their own releases or upstream collaboration.
+Third-party libraries remain pinned under `lib/`, with their licenses, source provenance and rebuild tooling. The small Aurie and YYToolkit patches stay alongside their pins. Separate forks are unnecessary for the current scope. A dedicated Aurie fork would make sense if native changes grow enough to need their own releases or upstream collaboration.
 
 Regression fixtures stay in the main repository so its tests do not require the sample checkout. New independent mods can follow ExampleMod's repository structure.

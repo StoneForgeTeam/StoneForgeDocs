@@ -12,6 +12,7 @@
 * [The mod context](core/mod-context.md)
 * [Settings](core/settings.md)
 * [Keyboard and mouse](core/input.md)
+* [Game events](core/events.md)
 * [The profiler](core/profiler.md)
 * [API lifetime rules](modding/api-lifetime-rules.md)
 
@@ -50,12 +51,15 @@
 * [Time and the world map](world/time-and-map.md)
 * [Rooms and saves](world/rooms-and-saves.md)
 * [Locations and ground items](world/locations-and-items.md)
+* [Inventory and containers](world/inventory-and-containers.md)
+* [Loot tables](world/loot-tables.md)
 * [Character looks](world/character-look.md)
 
 ## Development
 
 * [Building and testing](development/building-and-testing.md)
 * [Developer host and live probe](development/developer-host.md)
+* [Crash windows and reports](development/crash-reports.md)
 * [Third-party native binaries](development/third-party-binaries.md)
 * [Releasing](development/releasing.md)
 * [Repository layout](development/repositories.md)
