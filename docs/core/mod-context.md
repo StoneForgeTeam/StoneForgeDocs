@@ -43,6 +43,8 @@ public class MyMod : IStoneMod, ITickable
 }
 ```
 
+Reading keys and the mouse: [Keyboard and mouse](input.md).
+
 Anything else can be ticked with `context.AddTickable(thing)` (and stopped with `RemoveTickable`). Items and buffs that implement `ITickable` are ticked once they're added.
 
 ## What the context has
@@ -55,7 +57,7 @@ Anything else can be ticked with `context.AddTickable(thing)` (and stopped with 
 | `ContentId(key)` | The full id of your content: `"mymod:key"`. |
 | `Settings` | [Settings](settings.md) the player can change in the Mods window. |
 | `UI` | [Screens](../ui/screens-and-elements.md) to put UI on. |
-| `DrawGui`, `DrawHud` | Events to [draw](../ui/drawing-and-input.md) every frame: over everything, or with the game's HUD under its windows. |
+| `DrawGui`, `DrawHud` | Events to [draw](../ui/drawing.md) every frame: over everything, or with the game's HUD under its windows. |
 | `OnScript`, `OnCode` | [Hooks](../gml/hooks.md) by name. |
 | `LoadSprite`, `LoadSound` | Pictures and sounds from your `Assets` folder. |
 | `Files` | Reading and writing files. |

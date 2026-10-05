@@ -11,6 +11,7 @@
 
 * [The mod context](core/mod-context.md)
 * [Settings](core/settings.md)
+* [Keyboard and mouse](core/input.md)
 * [The profiler](core/profiler.md)
 * [API lifetime rules](modding/api-lifetime-rules.md)
 
@@ -36,7 +37,7 @@
 
 * [Screens and elements](ui/screens-and-elements.md)
 * [Windows](ui/windows.md)
-* [Drawing and input](ui/drawing-and-input.md)
+* [Drawing](ui/drawing.md)
 * [Dialogs and blackouts](ui/dialogs.md)
 * [The main menu](ui/main-menu.md)
 * [The Esc menu](ui/esc-menu.md)

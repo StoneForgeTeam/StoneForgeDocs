@@ -11,6 +11,8 @@ double x = Units.PositionOf(cellX);                    // a cell's middle, where
 Instance there = Units.At(cellX + 1, cellY);           // who stands on a cell (none: no one)
 ```
 
+The cell and unit under the mouse are `Mouse.Cell` and `Mouse.Unit` (see [the mouse in the world](../core/input.md#the-mouse-in-the-world)).
+
 | `Units` | |
 |---|---|
 | `CellSize` | 26: a cell's size in pixels. |

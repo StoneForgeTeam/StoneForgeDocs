@@ -65,7 +65,7 @@ Every element (`UIElement`) has:
 | | |
 |---|---|
 | `X`, `Y`, `Anchor` | Where it is: an offset from its anchor point in its parent (`UIAnchor.TopLeft`, `Top`, `TopRight`, `Left`, `Center`, `Right`, `BottomLeft`, `Bottom`, `BottomRight`). |
-| `Width`, `Height` | Its size, in the UI's units (the game's UI scale: see [Drawing](drawing-and-input.md)). |
+| `Width`, `Height` | Its size, in the UI's units (the game's UI scale: see [Drawing](drawing.md)). |
 | `Visible`, `Enabled`, `HitTest` | Hidden (with its children); drawn but not clicked; see-through to the mouse. |
 | `Tooltip` | Shown in the game's hover frame when the mouse rests on it. |
 | `Add(child)`, `Remove`, `Clear`, `Children`, `Parent` | Its children, drawn over it and placed in it. `Add` returns the child. |
