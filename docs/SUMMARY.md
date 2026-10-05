@@ -1,6 +1,6 @@
 # Table of contents
 
-* [StoneForge](README.md)
+* [Home](README.md)
 
 ## Getting started
 
