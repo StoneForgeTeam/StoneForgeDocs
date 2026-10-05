@@ -65,9 +65,25 @@ One buff on one unit:
 
 ## The game's own effects
 
+The game's effects - a stun, a bleed, No Retreat... - are objects, named `o_db_...` (debuffs) and `o_b_...` (buffs). `UnitEffects` works with them on any unit, the player's or another, as the game's own attacks and skills do:
+
 ```csharp
-context.Buffs.ApplyGame("o_db_daze", enemy, 3, player);
-bool has = context.Buffs.Has(enemy, shocked);
+using System.Linq;
+
+UnitEffects.Create("o_db_stun", enemy, 2, owner: player);
+if (UnitEffects.Has(enemy, "o_db_poison"))
+    context.Log("Poisoned");
+foreach (var effect in UnitEffects.On(enemy).Where(e => e.Shown && e.Harmful))
+    context.Log($"{effect.Name}: {effect.Duration} turns left");
 ```
 
-`ApplyGame` takes the effect's object name: `"o_db_daze"`, `"o_db_poison"`, `"o_db_bleed_tors"`...
+| `UnitEffects` | |
+|---|---|
+| `On(unit)` | The effects on a unit, in its order, as `GameEffect`s: `Instance`, `Object`, `Name`, `Duration` (turns left), `Shown` (an icon, not one of the game's invisible workings), `Harmful` (a debuff). |
+| `Has(unit, effect)` | Whether a unit has an effect, by its object's name. |
+| `Create(effect, target, turns, owner, stage)` | Puts one on as the game does: its immunities apply (`Stun_Immunity`...), a debuff's turns are shortened by the target's fortitude, and the target's HUD shows it. None if it couldn't (immune, dead, not a unit). |
+| `Refresh(effect, target, turns, stacks)` | Refreshes one as the game does: its turns set, and one made if the unit has fewer than `stacks` of it. |
+| `IconOf(effect)`, `IsShown(obj)` | An effect's icon; whether an effect object shows. |
+| `RemoveAll(unit)` | Takes every effect on a unit off, with their Destroy events. Do this before a unit is taken out without its own Destroy event (`Units.Remove` does it for you): effects left pointing at a unit that's gone crash the game. |
+
+`context.Buffs.ApplyGame(effect, target, turns, source)` and `context.Buffs.Has(unit, modBuff)` remain for applying a game effect and checking a mod's buff.

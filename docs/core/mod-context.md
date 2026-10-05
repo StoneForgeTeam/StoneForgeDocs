@@ -55,7 +55,7 @@ Anything else can be ticked with `context.AddTickable(thing)` (and stopped with 
 | `ContentId(key)` | The full id of your content: `"mymod:key"`. |
 | `Settings` | [Settings](settings.md) the player can change in the Mods window. |
 | `UI` | [Screens](../ui/screens-and-elements.md) to put UI on. |
-| `DrawGui` | An event to [draw](../ui/drawing-and-input.md) over everything, every frame. |
+| `DrawGui`, `DrawHud` | Events to [draw](../ui/drawing-and-input.md) every frame: over everything, or with the game's HUD under its windows. |
 | `OnScript`, `OnCode` | [Hooks](../gml/hooks.md) by name. |
 | `LoadSprite`, `LoadSound` | Pictures and sounds from your `Assets` folder. |
 | `Files` | Reading and writing files. |

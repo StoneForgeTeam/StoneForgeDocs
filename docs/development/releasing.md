@@ -33,6 +33,14 @@ git push origin :refs/tags/v0.2.0
 git push origin v0.2.0
 ```
 
+## Builds of main: main-latest
+
+Every push to `main` is also packaged, on the same runner, as a rolling pre-release: **`main-latest`**, with `StoneForge-main.zip` (the same zip a release makes, for `main` as it is now). It's replaced on every push and isn't a release: players install versioned releases.
+
+It's for mods developed against StoneForge's newest API (`"stoneforge": "latest"` in their `mod.json`): their CI can download `StoneForge-main.zip` and check their pushes compile against its `StoneForge.API.dll`, which GitHub's own runners can't generate without Stoneshard. The `main-latest` tag is moved to a commit only once its zip is up, so a mod's CI that finds the tag on `main`'s head knows the zip is that commit's.
+
+The [Main build workflow](https://github.com/StoneForgeTeam/StoneForge/blob/main/.github/workflows/main-build.yml) does this; it needs the release runner online, as releases do.
+
 ## The release runner
 
 StoneForge.API is generated from Stoneshard's own game data, and that data can't be put on GitHub's hosted runners. Releases are therefore built on a **self-hosted runner**: a Windows PC of yours that GitHub sends the release job to. The job only runs while the runner is online.

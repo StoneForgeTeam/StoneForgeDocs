@@ -1,6 +1,6 @@
 # The main menu
 
-`MainMenu` changes the main menu's list of buttons: add your own anywhere in it, move or re-add the game's own, or clear it and build a menu of your own.
+`MainMenu` changes the main menu's list of buttons: add your own anywhere in it, move, remove or re-add the game's own, or clear it and build a menu of your own. The in-game [Esc menu](esc-menu.md) works the same way.
 
 ```csharp
 MainMenu.AddButton(context, "My Mod", window.Open);                   // above Exit
@@ -15,6 +15,13 @@ MainMenu.AddBefore(context, "Credits", "Patch Notes", notes.Open);   // by name 
 `Play`, `Settings`, `Credits`, `Exit`, `Continue`, `NewGame`, `LoadGame`, `Prologue`, `Adventure`, `Back`.
 
 Each does in your menu what it does in the game's - greyed out as the game's is (and `Continue`, with no last save, left out). Their text is the game's, in its language.
+
+## Removing the game's buttons
+
+```csharp
+MainMenu.RemoveButton(context, VanillaButton.Credits);
+MainMenu.RemoveButton(context, "Other Mod's Button");   // by its text
+```
 
 ## Building a menu of your own
 
@@ -47,8 +54,10 @@ MainMenu.AddAfter(context, VanillaButton.Credits, "More", () =>
 | `AddBefore(context, anchor, text, onClick)` | Just above a button. |
 | `AddAfter(context, anchor, text, onClick)` | Just below a button. |
 | `AddButton(context, VanillaButton)`, `AddBefore(context, anchor, VanillaButton)`, `AddAfter(...)` | One of the game's buttons, back in, or moved if it's already there. |
+| `RemoveButton(context, VanillaButton)`, `RemoveButton(context, name)` | Take a button out. A named button that isn't there yet (another mod's, added later) goes when it comes. |
 | `ClearButtons(context)` | Empty the menu: the game's buttons and every mod's added so far. |
 | `RestoreButtons(context)` | The menu as it was when the game started, with what every mod did while it loaded. |
+| `UndoChanges(context)` | Undo just this mod's changes since it loaded (other mods' stay): for a change a mod makes for a while. |
 
 An **anchor** is a `VanillaButton`, or a button's name: the game button's name (`"Play"` or `"Start"`, `"Settings"`, `"Credits"`, `"Exit"`), the text shown on any button (in the game's language), or the text of a button a mod added. Case doesn't matter. If the anchor isn't in the menu, the new button goes above Exit (or last).
 

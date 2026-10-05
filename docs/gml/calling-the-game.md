@@ -48,7 +48,7 @@ Prefix globals of your own with your mod's id, so they don't clash with the game
 
 ## The game's random numbers
 
-`Gm.Irandom(max)` and `Gm.Random(max)` draw on the game's own generator, which it seeds for its world (levels, chests, loot). For a mod's own chances use C#'s `Random.Shared`, which leaves the game's rolls alone.
+`Gm.Irandom(max)`, `Gm.IrandomRange(min, max)` and `Gm.Random(max)` draw on the game's own generator, which it seeds for its world (levels, chests, loot). For a mod's own chances use C#'s `Random.Shared`, which leaves the game's rolls alone.
 
 To make the game's own random calls repeatable - the same dungeon, the same loot - run them seeded:
 

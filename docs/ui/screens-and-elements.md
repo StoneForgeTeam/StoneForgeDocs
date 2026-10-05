@@ -9,7 +9,8 @@ A mod's UI is built from elements - panels, labels, buttons, sliders, your own -
 | `MainMenu` | On the main menu. |
 | `InGame` | While a game is played. |
 | `Always` | Everywhere: the main menu, the game, its loading and menus. |
-| `When(() => condition)` | While your condition says so (asked each frame). |
+| `Hud` | While a game is played, with the game's HUD: see [Layers](#layers). |
+| `When(() => condition, layer)` | While your condition says so (asked each frame), on a layer (default `UILayer.Gui`). |
 
 ```csharp
 var panel = context.UI.MainMenu.Add(new ExamplePanel());
@@ -20,6 +21,23 @@ context.UI.MainMenu.Hidden += () => panel.Visible = false;
 A screen out of its context isn't drawn, updated or clicked, and as it leaves nothing stays held: the mouse lets go, an open dropdown closes, a text box lets go of the keyboard. Its elements keep their own `Visible` for when it's back. A screen has `IsActive`, `Shown` and `Hidden` events, and `MouseOverUI`.
 
 While the mouse is over mod UI, the game doesn't get the click (a click on a panel doesn't walk or attack), and while a text box has the keyboard, the game's hotkeys stay quiet.
+
+## Layers
+
+Mod UI is drawn on one of two layers:
+
+| `UILayer` | Drawn | Use it for |
+|---|---|---|
+| `Gui` (default) | Over everything: the world, the game's HUD and its windows. | Panels and windows of your own. |
+| `Hud` | With the game's HUD: over the world, **under** its windows (inventory, map, dialogue, the Esc menu) and its bottom panel; hidden when its HUD is (UI turned off, a cutscene). | What belongs with the HUD: frames, markers, bars. |
+
+```csharp
+var bar = context.UI.Hud.Add(new UIProgressBar(8, 40, 0, max: 100));
+var screen = context.UI.When(() => Gm.InGame && Player.InCombat, UILayer.Hud);
+context.DrawHud += () => Draw.Text(8, 60, "With the HUD", Draw.White);
+```
+
+A HUD element only has the mouse where none of the game's UI drawn over it is under the mouse: a click on a game window over it is the window's. `context.DrawHud` draws on the HUD layer as `context.DrawGui` draws over everything. Mod windows (`UIWindow`) still open over everything.
 
 ## Elements
 
