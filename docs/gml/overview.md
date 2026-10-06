@@ -14,7 +14,7 @@ You can mix layers freely. A typed instance always has its untyped `Instance` un
 
 ## Where the generated API comes from
 
-The generated API is made from the game's own data at build time: `StoneForge.DataDump` reads Stoneshard's `data.win`, and a source generator turns it into C#:
+The generated API is made from the game's own data at build time: `StoneForge.DataDump` reads Stoneshard's `data.win` (the VM build's: on the native branch it uses the last VM data it kept), and a source generator turns it into C#:
 
 | Generated | From | Example |
 |---|---|---|
@@ -35,7 +35,7 @@ Because these are generated, a typo is a compile error rather than a silent fail
 using StoneForge;
 using StoneForge.Objects;
 
-// Scripts this mod hooks must be declared, so the patcher makes them hookable.
+// Scripts this mod hooks are declared, so the patcher makes them hookable on the VM modbranch.
 [assembly: HookScript(nameof(Scripts.scr_player_move))]
 
 namespace MyMod;

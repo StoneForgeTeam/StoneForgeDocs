@@ -87,6 +87,7 @@ if (SaveData.Available)
 | `Sections`, `CharacterSections`, `WorldSections` | Section names: the character's (who they are, stats, skills, inventory, scrolls, cleared fog) and the world's (the map, locations, quests, contracts, time, weather...). |
 | `Section(name)`, `SectionList(name)` | A section as a map (`"gameDataMap"`) or list (`"inventoryDataList"`). |
 | `ToJson()`, `ToJson(sections)`, `CharacterJson()` | As JSON, as the game writes it. |
+| `ModData(context)` | Your mod's own values in the save data, under keys only it uses. |
 | `ModMap(key)` | A map of your own in the save data, saved and loaded with the game. |
 | `Save(kind)` | Runs the game's save step now: the character collected into the save data, then the save written as `SaveKind.Auto` (or another kind). No fade, no room change. |
 | `WriteTo(save)` | Writes the save data as it is now over a save already on disk (its data only), to add to one just made. |
@@ -94,17 +95,20 @@ if (SaveData.Available)
 ### Keeping a mod's own data in saves
 
 ```csharp
-DsMap stash = SaveData.ModMap("mymod_stash");   // made empty the first time
+var mine = SaveData.ModData(context);           // values only this mod uses
+mine["gold"] = mine["gold"].AsInt + 10;
+
+DsMap stash = SaveData.ModMap("mymod_stash");   // a whole map of your own, made empty the first time
 stash["gold"] = stash.Get("gold", 0) + 10;
 ```
 
-Use a key of your mod's own: the game's sections are the save data's other keys.
+`SaveData.ModData` keeps values under keys only your mod uses (see [ModData](../core/mod-context.md#values-of-your-own-moddata)). With `ModMap`, use a key of your mod's own: the game's sections are the save data's other keys.
 
 ### When saves are read and written
 
 ```csharp
 SaveData.OnLoaded(context, save => context.Log($"Loaded {save.Name}"));
-SaveData.OnSaving(context, save => SaveData.ModMap("mymod_stash")["saved_at"] = Time.Turns);
+SaveData.OnSaving(context, save => SaveData.ModData(context)["saved_at"] = Time.Turns);
 ```
 
 | | |

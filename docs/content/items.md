@@ -114,6 +114,7 @@ Each event gets the `Item` it happened to:
 | `Quality` | `ItemQuality.Common`, `Enchanted`, `Magical`, `Cursed`. |
 | `IsEquipped`, `Exists` | Whether it's worn; still in the game. |
 | `Data(key)`, `SetData(key, value)` | Values of its own, saved with it. |
+| `ModData(context)` | The mod's own values on it, under keys only it uses (see [ModData](../core/mod-context.md#values-of-your-own-moddata)). |
 | `Type`, `Name`, `Instance` | The mod item it is; its name in the tables; the game's instance. |
 
 ## Consumables

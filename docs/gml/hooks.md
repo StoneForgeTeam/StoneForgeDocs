@@ -15,7 +15,7 @@ Both are taken back automatically when your mod is switched off.
 [assembly: HookScript(nameof(Scripts.scr_atr))]
 ```
 
-StoneForge's patcher reads these declarations before the game starts and makes those scripts hookable. A new declaration takes effect the next time the game starts.
+On the VM modbranch, StoneForge's patcher reads these declarations before the game starts and makes those scripts hookable; a new declaration takes effect the next time the game starts, and hooking a script that isn't declared throws. On the native branch any script can be hooked, with nothing declared and no restart. Declare them anyway, so the mod works on both (see [Native and VM branches](../getting-started/game-branches.md)).
 
 ### Before
 
@@ -102,8 +102,36 @@ context.OnCode("gml_Object_o_player_Draw_0", after: (player, _) =>
         player["image_xscale"], player["image_yscale"], 0, Draw.White, 1));
 ```
 
-## Order and errors
+## Order and conflicts
 
-- Several mods can hook the same script or event. Before handlers run in load order; if one skips the game's code, later mods' before handlers still run.
+Several mods can hook the same script or event. Each hook has an **order**: lower runs first, then load order for the same number. It's an optional last parameter on `Before`, `After` and `Replace`, and on `context.OnScript` / `OnCode`:
+
+```csharp
+// Watch every call, before anyone changes it.
+Scripts.scr_atr.After(context, call => context.Log($"{call.Args[0]} = {call.Result}"), HookOrder.First);
+
+// Have the last word on what the script returns.
+Scripts.scr_atr.Replace(context, call => Scripts.scr_atr.CallOriginal(call), HookOrder.Last);
+
+// Just after the Late ones.
+Events.o_player.Step_0.After(context, player => { }, HookOrder.Late + 10);
+```
+
+| `HookOrder` | |
+|---|---|
+| `First` | -200: for hooks that only watch. |
+| `Early` | -100 |
+| `Normal` | 0, the default. |
+| `Late` | 100 |
+| `Last` | 200: for a mod that must have the last word on a script. |
+
+Any number between works too.
+
+If a before handler skips the game's code, later before handlers still run. When two mods' before hooks both **replace** the same call, the later one's `Result` is used (for a code entry, the game's code is skipped for both). That's a **conflict**: StoneForge logs it once, naming both mods and the script or code entry, and shows it on both mods' pages in the Mods window. It's found as it happens, so a hook that only sometimes replaces isn't a conflict until it does. A mod's own hooks never conflict with each other.
+
+Before they conflict, mods with before hooks on the same script or code entry at the **same order** (so which runs first is only load order) are listed once the mods have loaded: a line in the log for each pair ("Possible hook conflicts"), and a Possible Conflicts section on each mod's page in the Mods window. Yellow lines are calls both mods replaced; grey lines are calls both hook at the same order. Moving a hook to another order ends it.
+
+## Errors
+
 - A handler that throws is logged and skipped. If the same handler throws three times in a row, the mod is paused: its handlers stop, its windows close, and the Mods window shows "Paused:" with the error. Reload it from the Mods window to try again.
 - Keep handlers quick: Step and Draw events run every frame for every instance of the object.

@@ -47,7 +47,7 @@ StoneForge.API is generated from Stoneshard's own game data, and that data can't
 
 ### What the machine needs
 
-* Stoneshard from Steam, on the **VM modbranch**, with **StoneForge installed**. The integration tests need StoneForge's preserved unpatched data, `dotnet\data_base.win`. A release fails if that data is missing, rather than skipping the tests.
+* Stoneshard from Steam, with **StoneForge installed**, on either branch. On the native branch, build once on the VM modbranch first: the API is generated from the VM build's data, kept in `%LOCALAPPDATA%\StoneForge\GameData` (see [Building and testing](building-and-testing.md)). The integration tests need StoneForge's preserved unpatched data, `dotnet\data_base.win`, and a release fails if it's missing. They run only against VM data, though: on the native branch they skip, so a runner on the VM modbranch tests more.
 * Visual Studio with MSBuild and the C++ tools for toolset `v145`.
 * The .NET 10 SDK.
 * Git.

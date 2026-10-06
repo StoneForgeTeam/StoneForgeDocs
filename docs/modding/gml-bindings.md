@@ -1,5 +1,9 @@
 # Mod-owned GML and generated C# bindings (0.1.0)
 
+{% hint style="warning" %}
+**GML works only on the VM modbranch.** On the game's native branch its GML is compiled into the exe, and nothing can be added: a mod with a `GML` folder isn't loaded there, and its page in the Mods window says why. See [Native and VM branches](../getting-started/game-branches.md).
+{% endhint %}
+
 Put GML functions in a mod's `GML` folder (the mod itself: see [Writing a mod](writing-a-mod.md)). StoneForge compiles them into `data.win` when the game starts, and a Roslyn source generator gives the mod's C# a class to call them with. The same generator works in Visual Studio. GML changes need a full game restart; the mod's C# still hot-reloads.
 
 ## Calling your GML from C# code
