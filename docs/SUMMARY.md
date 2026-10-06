@@ -5,6 +5,7 @@
 ## Getting started
 
 * [Installation](getting-started/installation.md)
+* [Native and VM branches](getting-started/game-branches.md)
 * [Writing a mod](modding/writing-a-mod.md)
 
 ## Core concepts
@@ -13,6 +14,7 @@
 * [Settings](core/settings.md)
 * [Keyboard and mouse](core/input.md)
 * [Game events](core/events.md)
+* [Using other mods](core/other-mods.md)
 * [The profiler](core/profiler.md)
 * [API lifetime rules](modding/api-lifetime-rules.md)
 

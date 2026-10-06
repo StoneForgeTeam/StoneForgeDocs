@@ -50,13 +50,16 @@ Each item has its own data, kept with it wherever it goes (a chest, the ground, 
 if (Inventory.Add<MyBlade>() is { } blade)
 {
     blade.Durability = 50;
-    blade.SetData("mymod:kills", 0);
+    blade.ModData(context)["kills"] = 0;
 }
 
 Combat.OnHit(context, attack =>
 {
     if (attack.Killed && Inventory.Items().FirstOrDefault(i => i.IsEquipped && i.Name == "My Blade") is { Exists: true } worn)
-        worn.SetData("mymod:kills", worn.Data("mymod:kills").AsInt + 1);
+    {
+        var mine = worn.ModData(context);
+        mine["kills"] = mine["kills"].AsInt + 1;
+    }
 });
 ```
 
@@ -70,9 +73,10 @@ Combat.OnHit(context, attack =>
 | `Durability`, `MaxDurability`, `DurabilityPercent` | Its condition in points, as its tooltip shows, and in %. `Durability` can be set (kept between none and full). 0 for an item without one. |
 | `Quality` | Its quality (the game's rarity). |
 | `IsIdentified` | Whether it's identified (an unidentified one shows as "?"). Settable. |
-| `Data(key)`, `SetData(key, value)` | A value of its own: the game's (`"Duration"`, `"quality"`...) or a mod's. Name a mod's keys for the mod (`"mymod:kills"`). |
+| `ModData(context)` | The mod's own values on it, under keys only it uses: see [ModData](../core/mod-context.md#values-of-your-own-moddata). |
+| `Data(key)`, `SetData(key, value)` | A value of its own by its full key: the game's (`"Duration"`, `"quality"`...), or one a mod named itself (`"mymod:kills"`). |
 
-Every `Add` takes a `setup` that sets an item's values as it's made: `Inventory.Add("wine", setup: wine => wine.SetData("mymod:gift", true))`.
+Every `Add` takes a `setup` that sets an item's values as it's made: `Inventory.Add("wine", setup: wine => wine.ModData(context)["gift"] = true)`.
 
 ## Containers
 

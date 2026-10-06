@@ -61,7 +61,33 @@ Anything else can be ticked with `context.AddTickable(thing)` (and stopped with 
 | `OnScript`, `OnCode` | [Hooks](../gml/hooks.md) by name. |
 | `LoadSprite`, `LoadSound` | Pictures and sounds from your `Assets` folder. |
 | `Files` | Reading and writing files. |
+| `Mods` | The other mods running: see [Using other mods](other-mods.md). |
 | `AddTickable`, `RemoveTickable` | Ticking things other than the mod class. |
+
+## Values of your own: ModData
+
+A mod's own values, kept in what the game keeps (an item's data, the save data, an instance's variables), go under keys only that mod uses: two mods' `"kills"` are two values, and neither touches the game's.
+
+```csharp
+var mine = item.ModData(context);              // an InventoryItem, an Item or a GroundItem
+mine["kills"] = mine["kills"].AsInt + 1;
+
+SaveData.ModData(context)["visits"] = 3;        // saved with the game
+player.Instance.ModData(context)["marked"] = true;   // a variable on an instance
+```
+
+| Where | Kept |
+|---|---|
+| `InventoryItem.ModData`, `Item.ModData`, `GroundItem.ModData` | In the item's data: with it and saved with it wherever it goes (a chest, the ground, a save). |
+| `SaveData.ModData` | In the save data: saved with the game, back when it's loaded. Nothing's kept with no game. |
+| `Instance.ModData` | As variables on the instance, for as long as it's there. Not saved. |
+
+| `ModData` | |
+|---|---|
+| `this[key]` | A value; `undefined` if it hasn't been set. Setting it sets it. |
+| `Has(key)`, `Remove(key)` | Whether it's set; take it away (a variable is left `undefined`). |
+| `Keys` | The keys this mod has set here. |
+| `GameKey(key)` | The key as the game holds it: `"mymod:kills"` in a map, `"mymod__kills"` as a variable. |
 
 ## Pictures and sounds
 

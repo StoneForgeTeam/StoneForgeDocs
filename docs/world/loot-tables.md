@@ -30,22 +30,23 @@ The game loads its tables as it starts, after mods load: `Edit` and `EditAll` ca
 
 ## A table
 
-A `LootTable` has nine item slots and five equipment slots, each with its chance of giving anything each roll.
+A `LootTable` has item slots and five equipment slots, each with its chance of giving anything each roll. The game's own roll reads nine item slots. Once those are taken, `Add` puts an item in one of StoneForge's own beyond them, which StoneForge rolls just after the game's roll, the same way (the game's own loot script, for the same container and tier). So every mod's additions get in, however many there are.
 
 | `LootTable` | |
 |---|---|
 | `Name` | Its name: a loot key and a tier (`"cryptTomb3"`), or the key alone. |
-| `Slots` | Its nine item slots (`LootSlot`). |
+| `Slots` | Its item slots (`LootSlot`): the game's nine, then any extra ones. |
 | `EquipmentSlots` | Its five equipment slots (`LootEquipmentSlot`). |
 | `TierMod` | The tiers its items are of: `""` for the place's own, `"4"` for one, `"4,5"` for a range. |
-| `Add(item, chance, min, max, tags)` | Puts an item in its first empty slot: `min` to `max` of it, `chance`% of rolls. The slot, or `null` if all nine are taken. |
+| `Add(item, chance, min, max, tags)` | Puts an item in its first empty slot (an extra one, with the nine taken): `min` to `max` of it, `chance`% of rolls. The slot. |
 | `Add(consumable, chance, min, max)` | A mod's consumable. |
 
 An item is one of the game's items by its `o_inv_` object's name less `o_inv_` (`"wine"`), a kind of item the game picks one of (`"gem"`, `"valuable"`, `"treatise"`..., narrowed by `tags`), or several of either separated by commas, to choose one from.
 
 | `LootSlot` | |
 |---|---|
-| `Number`, `IsEmpty` | Its number, 1 to 9; whether it gives nothing. |
+| `Number`, `IsEmpty` | Its number (1 to 9 the game's, 10 on StoneForge's); whether it gives nothing. |
+| `IsExtra` | Whether it's one of StoneForge's beyond the game's nine. |
 | `Items` | What it may give, as the game names them (`"o_inv_wine"`, `"gem"`): one is chosen at random each roll. |
 | `Chance` | How likely it gives anything each roll, in %. Settable. |
 | `Count` | How many it gives when it does: `(Min, Max)`. Settable. |

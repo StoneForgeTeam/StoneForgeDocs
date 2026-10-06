@@ -35,6 +35,10 @@ Instance made = marker.Create(x, y, depth: 0);
 The key and parent must be **string literals** in the `base(...)` call. StoneForge's patcher reads them from your source and adds the object (`o_yourmod__marker`) to the game data at the game's next start. A new object, or a changed parent, needs a restart; its C# events reload with the mod.
 {% endhint %}
 
+{% hint style="info" %}
+On the game's **native branch** an object can't have code of its own. It's added with none, under its parent (or under the game's unused `o_GMLiveDebug` if it has none), and each C# event runs on the nearest ancestor that has that event, for its own instances only. An event that no ancestor has never runs there, and the log says which. Give the object a parent with the events you override. See [Native and VM branches](../getting-started/game-branches.md).
+{% endhint %}
+
 ## GameObject
 
 | | |
