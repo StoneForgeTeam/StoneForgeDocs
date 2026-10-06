@@ -1,0 +1,26 @@
+/* The logo and name over the table of contents. */
+.book-summary .summary::before {
+    content: "StoneForge";
+    display: block;
+    padding: 14px 15px 14px 88px;
+    min-height: 64px;
+    line-height: 64px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    background: url("logo-64.png") no-repeat 14px center / 64px 64px;
+    image-rendering: pixelated;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    margin-bottom: 10px;
+}
+.book.color-theme-2 .book-summary .summary::before { color: #f6c35b; border-bottom-color: #2a2f3b; }
+
+/* Pixel art stays crisp. */
+.markdown-section img[src*="branding/"] { image-rendering: pixelated; }
+.markdown-section img[src*="banner"] { width: 100%; border-radius: 6px; }
+
+/* Forge orange for links and the current page (over the theme's blue). */
+.book .book-body .page-wrapper .page-inner section.markdown-section a { color: #c8611f !important; }
+.book.color-theme-2 .book-body .page-wrapper .page-inner section.markdown-section a { color: #f6a93b !important; }
+.book .book-summary ul.summary li.active > a { color: #c8611f !important; }
+.book.color-theme-2 .book-summary ul.summary li.active > a { color: #f6a93b !important; }
