@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "honkit": "^6.2.2",
-    "honkit-plugin-hints": "file:./honkit/plugin-hints"
+    "honkit-plugin-hints": "file:./honkit/plugin-hints",
+    "honkit-plugin-branding": "file:./honkit/plugin-branding"
   }
 }

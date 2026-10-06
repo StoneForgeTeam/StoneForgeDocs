@@ -2,8 +2,14 @@
   "root": "./docs",
   "title": "StoneForge",
   "description": "C# mod loader for Stoneshard",
-  "plugins": ["hints", "-sharing"],
+  "plugins": [
+    "hints",
+    "branding",
+    "-sharing"
+  ],
   "pluginsConfig": {
-    "fontsettings": { "theme": "night" }
+    "fontsettings": {
+      "theme": "night"
+    }
   }
 }

@@ -1,3 +1,5 @@
+![StoneForge: a mod loader for Stoneshard](docs/assets/branding/banner-wide.png)
+
 # StoneForgeDocs
 
 Documentation for [StoneForge](https://github.com/StoneForgeTeam/StoneForge), the C# mod loader for Stoneshard, published as a self-hosted site and with [GitBook](https://www.gitbook.com/).
@@ -10,7 +12,7 @@ The same pages are published two ways. Use either or both.
 
 ### Self-hosted (GitHub Pages)
 
-[HonKit](https://github.com/honkit/honkit), the open-source successor to the GitBook command line, builds `docs/` into a static site using the same `SUMMARY.md`. [`book.json`](book.json) configures it, and [`honkit/plugin-hints`](honkit/plugin-hints) renders GitBook's `{% hint %}` blocks.
+[HonKit](https://github.com/honkit/honkit), the open-source successor to the GitBook command line, builds `docs/` into a static site using the same `SUMMARY.md`. [`book.json`](book.json) configures it, and [`honkit/plugin-hints`](honkit/plugin-hints) renders GitBook's `{% hint %}` blocks. [`honkit/plugin-branding`](honkit/plugin-branding) adds the logo, favicon and colours.
 
 Build and preview locally (Node.js 22):
 
@@ -34,3 +36,7 @@ The [Publish docs](.github/workflows/pages.yml) workflow builds every pull reque
 - Link between pages with relative paths to the `.md` files, so links work on GitHub, in GitBook and in the self-hosted site.
 - Check pages with `npm run build` before pushing. HonKit drops a `#` at the end of a heading, so word headings so they don't end in one ("from C# code", not "from C#").
 - Documentation describes the matching StoneForge release. When a StoneForge change alters behavior described here, update the page in the same release.
+
+## Branding
+
+The logo and banner are in [`docs/assets/branding/`](docs/assets/branding/): `logo-64.png` to `logo-1024.png` (pixel art, transparent; scale by whole multiples), `banner-wide.png` (1920x600, for page headers) and `banner.png` (1920x1080, for social previews). The self-hosted site uses them through `honkit/plugin-branding`. On GitBook, set the logo and favicon in the site's customization settings, from the same files.
