@@ -18,10 +18,11 @@ C# mods work on both. On the native build there's no GML to add to, so StoneForg
 | C# mods: items, buffs, skills, UI, events, hooks... | Yes | Yes |
 | [A mod's own GML](../modding/gml-bindings.md) (its `GML` folder) | **No**: the mod isn't loaded, and its page in the Mods window says why | Yes |
 | [Script hooks](../gml/hooks.md#script-hooks) | Any script, nothing to declare | The scripts the mod declares with `[assembly: HookScript]`, from the next start |
+| [MSL mods](msl-mods.md) (`.sml` packages) | **No**: they show in the Mods window with an error, and aren't applied | Yes |
 | [A mod's game objects](../content/game-objects.md) | Run their parents' events: an event no ancestor has never runs (the log says which) | Have every event of their own |
 
 {% hint style="warning" %}
-**GML only works on the VM modbranch.** A mod with a `GML` folder isn't loaded on the native branch. If your mod needs GML, say so on its page, and tell players to switch to the modbranch.
+**GML and MSL mods only work on the VM modbranch.** A mod with a `GML` folder isn't loaded on the native branch, and `.sml` packages aren't applied there. If your mod needs GML, say so on its page, and tell players to switch to the modbranch.
 {% endhint %}
 
 ## Writing mods for both

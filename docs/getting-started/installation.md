@@ -2,8 +2,8 @@
 
 ## Requirements
 
-* Stoneshard (Steam), on the default (native) branch or the **VM modbranch**. Mods with GML of their own need the VM modbranch: see [Native and VM branches](game-branches.md).
-* The **.NET 10 Runtime, x64** to play with mods: [download](https://dotnet.microsoft.com/download/dotnet/10.0). The installer tells you if it's missing.
+* Stoneshard (Steam), on the default (native) branch or the **VM modbranch**. Mods with GML of their own, and MSL mods, need the VM modbranch: see [Native and VM branches](game-branches.md).
+* The **.NET 10 Windows Desktop Runtime, x64**: [download](https://dotnet.microsoft.com/download/dotnet/10.0). It covers every kind of mod. The base .NET 10 Runtime is enough for StoneForge's own C# mods, but [MSL mods](msl-mods.md) need the Desktop one. The installer tells you if it's missing.
 
 StoneForge uses UndertaleModLib 0.9.2.0 and Underanalyzer directly to patch game data. Game data is read from your local install.
 
@@ -18,6 +18,8 @@ Re-running the installer from a newer release updates an existing installation. 
 ## Mods
 
 Mod folders go in `<Stoneshard>\mods`. Open the in-game Mods window to enable or disable them.
+
+MSL mods (`.sml` files) go directly in `<Stoneshard>\mods` too, on the VM modbranch: see [MSL mods](msl-mods.md).
 
 {% hint style="warning" %}
 GML mods carry a warning: their scripts execute directly in GameMaker, outside the C# source restrictions, and need a game restart after edits. They run only on the **VM modbranch**: on the native branch they aren't loaded. See [GML bindings](../modding/gml-bindings.md).
@@ -41,4 +43,5 @@ Close Stoneshard and run `Uninstall StoneForge.cmd`. The game's own files are pu
 
 * `StoneShard.exe` is patched to load StoneForge (the original is kept as `StoneShard.exe.vanilla`).
 * `data.win` gets StoneForge's additions (the original is kept as `dotnet\data_base.win`). On the native branch these are only objects with no code: mods' objects and the loader's own.
+* With MSL mods, `dotnet\patcher\msl\` holds the bundled MSL helper, and `dotnet\msl-patch.log` its log.
 * `AurieCore.dll`, `aurie\` and `dotnet\` hold StoneForge itself; `mods\` holds your mods.
