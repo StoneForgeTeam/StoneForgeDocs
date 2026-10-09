@@ -43,5 +43,5 @@ Close Stoneshard and run `Uninstall StoneForge.cmd`. The game's own files are pu
 
 * `StoneShard.exe` is patched to load StoneForge (the original is kept as `StoneShard.exe.vanilla`).
 * `data.win` gets StoneForge's additions (the original is kept as `dotnet\data_base.win`). On the native branch these are only objects with no code: mods' objects and the loader's own.
-* With MSL mods, `dotnet\patcher\msl\` holds the bundled MSL helper, and `dotnet\msl-patch.log` its log.
+* With MSL mods, `dotnet\patcher\msl\` holds the bundled MSL helper and `dotnet\msle\` MSL Enhanced; `dotnet\msl-patch.log` is their log, and `dotnet\msl-audio-base\` keeps the originals of sounds, fonts and shaders Enhanced mods replace.
 * `AurieCore.dll`, `aurie\` and `dotnet\` hold StoneForge itself; `mods\` holds your mods.

@@ -73,6 +73,8 @@ Quests.OnProgress(context, (quest, task, value) => context.Log($"{quest}: {task}
 
 They run only when something changed, not for every call that would.
 
+To add quests of your own, see [Custom quests and contracts](quests-and-contracts.md).
+
 ## Journal and contracts
 
 ```csharp
@@ -101,4 +103,4 @@ ActionsLog.Write("noDamage", ActionsLog.NameOf(enemy));
 
 ## Steam
 
-`Steam.PersonaName` is the player's Steam name (`""` without Steam).
+`Steam.PersonaName` is the player's Steam name (`""` without Steam), and `Steam.AccountId` their account ID.

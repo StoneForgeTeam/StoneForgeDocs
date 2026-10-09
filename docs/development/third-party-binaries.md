@@ -8,6 +8,8 @@ Aurie (`AurieCore.dll`, `AuriePatcher.exe`) and YYToolkit (`YYToolkit.dll`) are 
 
 The MSL compatibility helper's binaries are in `lib/MSL`: ModShardLauncher 0.13.2.0's `ModShardLauncher.dll`, and the older `UndertaleModLib.dll` and `UndertaleModTool.dll` it was built with, all GPL-3.0. Its README pins their checksums and upstream revision. They run only inside the separate `StoneForge.MslHost` process (also GPL-3.0), never in the loader, and StoneForge's own newer UndertaleModLib stays apart from them.
 
+MSL Enhanced (by Tbonex28b, GPL-3.0 per its mod page) is in `lib/MSLE`: the supplied build's `ModShardLauncher.dll`, `UndertaleModLib.dll` and `UndertaleModTool.dll`, pinned by SHA-256 (its file version is still 0.13.2.0), with the dependencies it came with (Magick.NET and ImageMagick, SharpZipLib, XamlAnimatedGif, Microsoft.Win32.SystemEvents). No source for the Enhanced fork was supplied; these are its binaries as given. Releases install it in `dotnet/msle`, and it runs in the same helper process as regular MSL.
+
 Releases include the licences, the patches and those notes under `LICENSES\`.
 
 To rebuild them from source (needs git and Visual Studio's C++ tools; clones into `build\.thirdparty`):
