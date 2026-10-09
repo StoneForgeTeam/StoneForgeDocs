@@ -8,6 +8,15 @@ MainMenu.AddAfter(context, VanillaButton.Play, "Multiplayer", lobby.Open);
 MainMenu.AddBefore(context, "Credits", "Patch Notes", notes.Open);   // by name or text
 ```
 
+A button's text can be a function, so it follows the game's language (see [Localization](../core/localization.md)):
+
+```csharp
+MainMenu.AddButton(context, () => context.Localization.Get("menu.options"), window.Open);
+MainMenu.AddAfter(context, VanillaButton.Play, () => context.Localization.Get("menu.multiplayer"), lobby.Open);
+```
+
+`AddButton`, and `AddBefore` / `AddAfter` with a `VanillaButton`, take one.
+
 ## The game's buttons
 
 `VanillaButton` names the game's own buttons, from the main list and its play screens:

@@ -1,6 +1,6 @@
 # Writing a mod
 
-A mod is a folder in `Stoneshard\mods`: its `mod.json`, its C# source (`*.cs`, in any subfolders), its pictures and sounds in `Assets\`, and optionally its GML in `GML\` (see [GML bindings](gml-bindings.md); GML runs only on the VM modbranch). StoneForge compiles and checks the source when the game starts. A folder holds one mod.
+A mod is a folder in `Stoneshard\mods`: its `mod.json`, its C# source (`*.cs`, in any subfolders), its pictures and sounds in `Assets\`, its translations in `Localization\` (see [Localization](../core/localization.md)), its NPC dialogue edits in `Dialogue\` (see [NPC dialogues](../ui/npc-dialogues.md#where-edits-go)), and optionally its GML in `GML\` (see [GML bindings](gml-bindings.md); GML runs only on the VM modbranch). StoneForge compiles and checks the source when the game starts. A folder holds one mod.
 
 ## mod.json
 
@@ -26,6 +26,7 @@ A mod is a folder in `Stoneshard\mods`: its `mod.json`, its C# source (`*.cs`, i
 | `stoneforge` | optional | The StoneForge version it needs, at least (`"0.8.0"`). An older StoneForge doesn't load it and says so. `"latest"` marks a mod in development: see below. |
 | `requires` | optional | Mods it needs, by ID. It loads after them, only if they're all there and running, and it can use their public types. See [Using other mods](../core/other-mods.md). |
 | `after` | optional | Mods to load after, if they're there. |
+| `contributors` | optional | Steam accounts (as strings: account IDs or SteamID64s) that can use the mod's dev tools, such as the [dialogue editor](../ui/npc-dialogues.md#the-in-game-dialogue-editor). `context.IsContributor` checks the current one. |
 | `trusted` | optional | `true` asks for full access: its own DLLs, the whole of .NET and no sandbox. It runs only once the player allows it in the Mods window. See [Trusted mods](../core/mod-context.md#trusted-mods). |
 
 ### Mods in development: "latest"

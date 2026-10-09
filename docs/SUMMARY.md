@@ -16,6 +16,7 @@
 * [Keyboard and mouse](core/input.md)
 * [Game events](core/events.md)
 * [Using other mods](core/other-mods.md)
+* [Localization](core/localization.md)
 * [The profiler](core/profiler.md)
 * [API lifetime rules](modding/api-lifetime-rules.md)
 
@@ -46,6 +47,7 @@
 * [The main menu](ui/main-menu.md)
 * [The Esc menu](ui/esc-menu.md)
 * [Right-click menus](ui/context-menus.md)
+* [NPC dialogues](ui/npc-dialogues.md)
 
 ## World
 
@@ -56,6 +58,7 @@
 * [Locations and ground items](world/locations-and-items.md)
 * [Inventory and containers](world/inventory-and-containers.md)
 * [Loot tables](world/loot-tables.md)
+* [Custom quests and contracts](world/quests-and-contracts.md)
 * [Character looks](world/character-look.md)
 
 ## Development

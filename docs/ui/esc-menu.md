@@ -7,6 +7,8 @@ EscMenu.AddButton(context, "Mod Options", window.Open);            // above the 
 EscMenu.AddAfter(context, EscButton.Resume, "Quick Save", () => SaveData.Save());
 ```
 
+`EscMenu.AddButton(context, () => text, onClick)` takes its text as a function, so it follows the game's language (see [Localization](../core/localization.md)).
+
 ## The game's buttons
 
 `EscButton` names the game's own: `Resume`, `Settings`, `MessageLog`, `LoadGame`, `Exit`, `SaveAndExit`, `ExitGame` (to the desktop). Their text is the game's, in its language.

@@ -62,6 +62,10 @@ Anything else can be ticked with `context.AddTickable(thing)` (and stopped with 
 | `LoadSprite`, `LoadSound` | Pictures and sounds from your `Assets` folder. |
 | `Files` | Reading and writing files. |
 | `Mods` | The other mods running: see [Using other mods](other-mods.md). |
+| `Localization` | The mod's translations: see [Localization](localization.md). |
+| `Quests`, `Contracts` | [Custom quests and contracts](../world/quests-and-contracts.md). |
+| `Dialogues` | [NPC dialogues](../ui/npc-dialogues.md). |
+| `IsContributor` | Whether the current Steam account is in the mod's `contributors`. |
 | `AddTickable`, `RemoveTickable` | Ticking things other than the mod class. |
 
 ## Values of your own: ModData
