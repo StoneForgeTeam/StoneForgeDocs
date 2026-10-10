@@ -108,7 +108,7 @@ for (int row = 1; row <= 20; row++)
 | `UISlider` | The game's volume slider: `Min`, `Max`, `Step`, `Value`, `Format`, `Changed`. |
 | `UIProgressBar` | The game's health (`UIBarStyle.Health`) or energy (`Energy`) bar: `Value`, `Max`, `Text`, `Smooth`. |
 | `UIDropdown` | The Settings menu's combobox: `Options`, `SelectedIndex`, `Selected`, `MaxVisibleRows`, `Changed`. Its list draws over everything. |
-| `UITextBox` | The game's text input: `Text`, `Placeholder`, `MaxLength`, `TextChanged`, `Submitted`, `Focus()`, `Blur()`. |
+| `UITextBox` | The game's text input: `Text`, `Placeholder`, `MaxLength`, `TextChanged`, `Submitted`, `Focus()`, `Blur()`. `Multiline` wraps the text over several lines: Enter starts a new line, and the arrow keys move between them. |
 | `UIScrollList` | Rows scrolled one at a time, with the game's scrollbar. |
 | `UIScrollArea` | A smoothly scrolled column, as the Settings page: `AddHeader`, `AddText`, `AddImage`, `AddCheckbox`, `ScrollTo`. |
 | `UIButtonRow` | A row of buttons, spread or packed, or at set `Positions`. |

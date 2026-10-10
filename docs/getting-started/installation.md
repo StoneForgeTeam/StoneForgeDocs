@@ -17,7 +17,9 @@ Re-running the installer from a newer release updates an existing installation. 
 
 ## Mods
 
-Mod folders go in `<Stoneshard>\mods`. Open the in-game Mods window to enable or disable them.
+Mod folders go in `<Stoneshard>\mods`. Open the in-game Mods window to enable or disable them. Enabling or reloading C# mods there (or **Enable all**) shows the loading screen, with each mod as it loads and any that fail, then returns to the Mods window.
+
+To report a problem with StoneForge or a mod, use **Report a bug** in the Esc menu: see [Bug reports](bug-reports.md).
 
 MSL mods (`.sml` files) go directly in `<Stoneshard>\mods` too, on the VM modbranch: see [MSL mods](msl-mods.md).
 
