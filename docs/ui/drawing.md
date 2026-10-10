@@ -1,6 +1,6 @@
 # Drawing
 
-`Draw` draws on the screen in GUI coordinates: `(0, 0)` is the top left, and the screen is `Draw.Width` x `Draw.Height`. Coordinates are in units of the game's UI scale (`Draw.Scale`: its camera scale, 2 in a window around 1280x720), so mod UI is the size of the game's and its pixel art as crisp.
+`Draw` draws on the screen in GUI coordinates: `(0, 0)` is the top left, and the screen is `Draw.Width` x `Draw.Height` (the game's window, fullscreen or not). Coordinates are in units of the game's UI scale (`Draw.Scale`: its camera scale, 2 in a window around 1280x720), so mod UI is the size of the game's and its pixel art as crisp.
 
 Draw from an element's `OnDraw` (see [Screens and elements](screens-and-elements.md)), from `context.DrawGui`, which runs every frame in the game's Draw GUI pass, over everything, or from `context.DrawHud`, with the game's HUD, under its windows (see [Layers](screens-and-elements.md#layers)):
 
