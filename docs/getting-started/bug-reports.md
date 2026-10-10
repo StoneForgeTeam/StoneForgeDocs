@@ -27,3 +27,5 @@ Add your mod's GitHub repository to its `mod.json`:
 A URL such as `https://github.com/YourAccount/YourMod` works too. The form then lists your mod while it's running.
 
 StoneForge only checks how the repository is written. For reports to arrive, the repository must exist and be set up to receive them through BugDrop.
+
+To install BugDrop into your repository add it through the GitHub marketplace here (It is free) https://github.com/marketplace/bugdrop-in-app-feedback-to-github-issues
