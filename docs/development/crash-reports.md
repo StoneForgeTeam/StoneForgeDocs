@@ -18,7 +18,9 @@ An exception nothing caught shows a window with its stack trace, and is written 
 
 ## A mod's handler throws
 
-StoneForge catches an exception from a mod's handler (an event, a hook, `Tick`, UI) and the game goes on. A window shows its stack trace the first time for each mod and place, without stopping the game. A mod that keeps failing is paused.
+StoneForge catches an exception from a mod's handler (an event, a hook, `Tick`, UI) and the game goes on. A window shows its stack trace the first time for each mod and place, without stopping the game. A mod that keeps failing is paused. The mod is told through `context.Failed`.
+
+The first time any mod's handler throws in a game, StoneForge also keeps a backup of the save being played and asks whether to leave without saving: see [Save backups](../getting-started/save-backups.md#after-a-mods-error).
 
 ## A GML error
 

@@ -133,5 +133,5 @@ Before they conflict, mods with before hooks on the same script or code entry at
 
 ## Errors
 
-- A handler that throws is logged and skipped. If the same handler throws three times in a row, the mod is paused: its handlers stop, its windows close, and the Mods window shows "Paused:" with the error. Reload it from the Mods window to try again.
+- A handler that throws is logged and skipped, and the mod's [`context.Failed`](../core/mod-context.md#when-a-handler-fails) is told (the first time for each handler). If the same handler throws three times in a row, the mod is paused: its handlers stop, its windows close, and the Mods window shows "Paused:" with the error. Reload it from the Mods window to try again.
 - Keep handlers quick: Step and Draw events run every frame for every instance of the object.

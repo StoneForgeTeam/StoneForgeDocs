@@ -8,6 +8,7 @@
 * [Native and VM branches](getting-started/game-branches.md)
 * [MSL mods (.sml)](getting-started/msl-mods.md)
 * [Bug reports](getting-started/bug-reports.md)
+* [Save backups](getting-started/save-backups.md)
 * [Writing a mod](modding/writing-a-mod.md)
 
 ## Core concepts

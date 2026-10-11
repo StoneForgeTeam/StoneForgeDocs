@@ -117,3 +117,19 @@ SaveData.OnSaving(context, save => SaveData.ModData(context)["saved_at"] = Time.
 | `SaveData.OnSaving(context, save => ...)` | A save is about to be written (saving, an autosave, an exit save): what's in the save data then goes to disk. |
 
 The world map's fog and paper are written into the save data only as the game saves. Call `WorldMap.Save()` before handing the save data to anything that will load it (see [the world map](time-and-map.md#the-world-map)).
+
+## Save backups
+
+StoneForge backs up every save before the game writes over it or deletes it: see [Save backups](../getting-started/save-backups.md).
+
+```csharp
+// Keep the save being played, for good, before something risky.
+if (SaveBackups.Keep("mymod-before-import") is { } where)
+    context.Log($"Kept a copy in {where}");
+```
+
+| `SaveBackups` | |
+|---|---|
+| `Keep(label)` | Copies the save being played (the last one loaded or made) as `<label>_<time>_<save>`, never deleted with the other backups. Where it went; `null` if there's no save to keep. |
+| `Folder` | Where backups are: a folder for each character. |
+| `Kept` | 20: how many of each character's backups are kept (the newest). |
