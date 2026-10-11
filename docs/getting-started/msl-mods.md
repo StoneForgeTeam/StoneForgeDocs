@@ -25,9 +25,10 @@ When the game starts, StoneForge's patcher prepares the game data:
 2. The bundled MSL 0.13.2.0 helper (or [MSL Enhanced](#msl-enhanced)) applies the enabled packages, in filename order (or the order you set in [`msl-runtime.json`](#msl-runtimejson)).
 3. StoneForge applies its own patches on top.
 
-The result is kept until something changes. Adding, changing, disabling or removing a package rebuilds the game data from the preserved base on the next start. A console window shows the helper's progress while it works.
+The result is kept until something changes. There's no fixed time limit: large packages can take an hour, so it keeps going while the helper is working (writing output or using the CPU), showing the time taken, and stops only if it makes no progress for five minutes. Closing the patch console ends the helper too. Adding, changing, disabling or removing a package rebuilds the game data from the preserved base on the next start. A console window shows the helper's progress while it works.
 
 - **No hot reload.** Unlike StoneForge's C# mods, MSL packages only change at a restart.
+- **Order matters.** Packages load in filename order (or [`msl-runtime.json`](#msl-runtimejson)'s), and later ones win where they change the same thing. A package's page in the Mods window shows its place: "Loads 2nd of 3: mods loaded later win".
 - **File names identify packages.** Renaming a disabled package makes it a new, enabled one.
 - **A failed patch changes nothing.** If the helper fails, the last game data stays in place. Don't assume a changed selection was applied after an error: the log says what went wrong.
 
@@ -39,7 +40,7 @@ By default (`auto`), StoneForge uses Enhanced when an enabled package needs it: 
 
 Enhanced packages can also replace sounds, fonts and shaders outside `data.win`. StoneForge keeps the originals in `dotnet\msl-audio-base` and puts them back when those mods are removed, or when StoneForge is uninstalled: keep that folder. Fonts and shaders go in the game's usual `StoneShard\fonts` and `StoneShard\shaders` folders in AppData.
 
-Enhanced's errors stop preparation, with details in `dotnet\msl-patch.log`: missing dependencies, load-order problems, resource conflicts, and patch or import errors. Nothing is changed then. Enhanced's own native-branch (YYC) features and launcher UI aren't supported.
+Packages that replace the same resource don't stop preparation: as with OK in Enhanced's own conflict dialog, the later package's version is used. The conflicts are listed in the patch console and `dotnet\msl-patch.log`. Missing dependencies, load-order errors and patch or import errors do stop it, with details in the log; nothing is changed then. Enhanced's own native-branch (YYC) features and launcher UI aren't supported.
 
 ### msl-runtime.json
 

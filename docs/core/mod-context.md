@@ -65,8 +65,23 @@ Anything else can be ticked with `context.AddTickable(thing)` (and stopped with 
 | `Localization` | The mod's translations: see [Localization](localization.md). |
 | `Quests`, `Contracts` | [Custom quests and contracts](../world/quests-and-contracts.md). |
 | `Dialogues` | [NPC dialogues](../ui/npc-dialogues.md). |
+| `Failed` | An event: one of the mod's handlers threw. See [When a handler fails](#when-a-handler-fails). |
 | `IsContributor` | Whether the current Steam account is in the mod's `contributors`. |
 | `AddTickable`, `RemoveTickable` | Ticking things other than the mod class. |
+
+## When a handler fails
+
+When one of a mod's handlers throws, StoneForge logs it, shows its error box and carries on without that handler's work. `context.Failed` tells the mod, the first time each handler throws: where it was (`"Tick"`, `"scr_effect_create (script after)"`...) and the exception. Use it to look after your players' data: warn them, or keep a copy of their save.
+
+```csharp
+context.Failed += (where, error) =>
+{
+    SaveBackups.Keep("mymod-error");
+    context.Log($"{where} failed: {error.Message}");
+};
+```
+
+It runs on the game thread. A `Failed` handler that throws is only logged. See also [Save backups](../getting-started/save-backups.md#after-a-mods-error).
 
 ## Values of your own: ModData
 

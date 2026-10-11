@@ -11,7 +11,7 @@ A mod is a folder in `Stoneshard\mods`: its `mod.json`, its C# source (`*.cs`, i
   "version": "1.0.0",
   "author": "you",
   "description": "What it does, in a sentence or two.",
-  "stoneforge": "0.9.1",
+  "stoneforge": "0.9.4",
   "requires": ["othermod"],
   "after": ["thirdmod"]
 }
@@ -23,7 +23,7 @@ A mod is a folder in `Stoneshard\mods`: its `mod.json`, its C# source (`*.cs`, i
 | `name` | required | Shown in the Mods window, its log lines and "Mod: ..." on its items. |
 | `version` | required | Your mod's version. |
 | `author`, `description` | optional | Shown in the Mods window. |
-| `stoneforge` | optional | The StoneForge version it needs, at least (`"0.9.1"`). An older StoneForge doesn't load it and says so. `"latest"` marks a mod in development: see below. |
+| `stoneforge` | optional | The StoneForge version it needs, at least (`"0.9.4"`). An older StoneForge doesn't load it and says so. `"latest"` marks a mod in development: see below. |
 | `requires` | optional | Mods it needs, by ID. It loads after them, only if they're all there and running, and it can use their public types. See [Using other mods](../core/other-mods.md). |
 | `after` | optional | Mods to load after, if they're there. |
 | `github` | optional | The mod's GitHub repository (`"YourAccount/YourMod"`, or its URL), for [bug reports](../getting-started/bug-reports.md) from the Esc menu. |
